@@ -1,0 +1,92 @@
+ur mom gay lol
+
+recordidng the time in a think aloud is important.
+you always have to get hold of real users to get a true assessment
+user testing is good becaise it's cheap and quick
+user testing is also convincing lol, give videos of it and dat
+how to do user testing:
+get representitive users
+give the users realistic tasks to get a good idea
+let the users do the talking because dont want a bias
+**get the think alpouds done for the assignment
+
+looking for the why, in a think aloud and can't analyse this with numbers so dont treat it like a statistics task, rather have a design expert to take data and think through what it means for webste. Have t look at issues and think des this apply to populations or just the one user.
+
+empathy is crucial in design because youre trying to think like them and feel how theuy feel, biggest way to breach is to think of them as a person rather than an abstract group...imagine what theyre doing.
+
+soft vs hard system:
+
+key point is that soft systems, invlove people and cant be perfectly evaluated.Thinks with maths for example where you can come up with a mathematical guess its still going to be a hard, with a soft theres always a based on the evidence we have theres chance for people to act unpredictqably and thus cant be sure.
+
+transformation means a change in state, what is this movement
+
+weltanschauung is about trying to understand what the butterfly effect is going to be beyonf the point.
+
+stakeholder you need to consider is JUST the USER. (in this course)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ITERATIONS
+
+always design and evaluate until you decide its good enough for some form of release
+core phases:
+analyse problem
+design solution for the problem
+implement solution for problem
+evaluation
+
+doing this a million times isnt great because it takes alot of iterations which can cost money and all that stuff
+
+ways to do this better is to learn from others like copying amazon, but keep in mind your users and purpose is not going to be the same. Do your own investigation and come across the problems youll come across and come up with ways to solveit, think is this goign to work for the persona were developng for. This is goodbacause it basically just lowers costs because you know you dont need to go through these cycles heaps of times.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+INFOMATION ARCHITECTURE
+
+fancy name for categorisation.
+what do you do to yur raw pieces of data to clump them. Theres a structure to the things we know and do (can be considered mental model) apply to what interacting with, and this will influence the effectiveness of what youre using
+
+infomation architecture is the discipline of ornaising and structuring data and functions in a system to support usability.
+
+core idea: how we go from data to knowlege. Itermediate step is infomation, which is structered purposeful useable data. knwledge includes mental models. another way of looking at communication model. 
+
+2 organisational scheme and organisational structure, important for making decisions. 
+schemes: what data goes with what other data
+structure: 
+
+Schemes come in three main types:
+Exact, Ambiguous, Hybrid
+exact: mutually exclusive, (1 item can only be in one category)
+amb
+
+Structure: how you access those different categories
+heirachy: like a file system or a fmaily tree
+database orientated(like the advanced search on the library page)
+hypermedia: grown out of the idea of hypertext, where you click a link and it goes to a video or whatever, when you have links you go to a particular resource, this is the essense of hypermedia. New Concept
+
+people think that you dont need structures like lists and stuff because you can just link people to what they want, but in reality you still have to think about wht the users gonna do and all that.
+
+Scheme Structure and navigational context are what form the users mental model of like how they archieve thier goals using the interface. 
+
+card sorting technique: to ahve users group what youre doing, can have the users generate categories or give them categories that theyll use. When they use them they tell you how they think the data should be structured
+
+Open Card sorting: user writes theyre own categiries
+Closed Card Sorting: give them categories for them to put into 
+Hybrid card sorted: where you give them and they can rearrange depending on what they need
+
+	have rules like this;
+will continue to sort after they finsih what theyre doing
+youll get richer data the less you give them
+theyl base theyre structure based on what they see first
+dont need to test everythinmg, need to check
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PROTOTYPING
+
+middle steps how we go from idea to final product, 
+want to close the difference so we want to evaluate quicker, we do this through prototypes
+they are representzations only, encapsulating some or all of your system. 
+
+paper prototype is one way of doing this.
+
+:wq
+
