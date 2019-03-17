@@ -1,0 +1,226 @@
+ideas for assignment on card sorting:
+
+assignment consists of usyd directories and other stuff.
+one study must be completely closed one completely open.
+must complete at least four of them. 
+
+closed:
+PARTICIPANTS ARE GIVEN A SERIES OF CARDS,including a group of categories and told to sort them. 
+open:
+participants are given a series of cards, and told to group them participants are then given 1 blank card per group and told to write a category name on that. 
+
+premise for assessment:
+-usyd app need to sort soem categories
+-categories contain things like restaurant opening hours, society meet ups, sports study locations, campus maps and directories.
+
+list of 20 elements:
+--fisher library
+--wentworth building
+--society meet up times
+--welcome week
+--restaurant opening times
+--hermans bar
+--transport options
+--eastern avenue 
+--water refill stations
+--study help
+--labs
+--student timetable
+--usyd gym membership
+--lecture theatres
+--campus atm locations
+--usyd shops
+--usyd accomodation options
+--usyd colleges
+--sci tech library
+--law library
+--usyd staff
+--campus maps
+--usyd news
+
+next step in this process will be to come with some categories myself and say how i wuld sport them and then decide the final 20 elements to get othe rpeopkle to sort by the ones tha ti can easily come up with a category for; when it is time to do the closed one hvae the categories to give out as well. 
+
+then youll have to make a app design thingo that has pictures of how the prototype will look:
+
+1st participant:
+
+The first participant was told to make a series of categories and subcategories that could be applied to each element of the list above, with no restrictions applied, i.e was a fully open study. The first participant came up with the following categories and subcategories. In the decription below the 
+
+University Facilities:
+	Libraries:
+		--fisher library
+		--sci tech library
+		--law library
+	Buildings/locations:
+		--wentworth building
+		--Herman's Bar
+		--eastern ave
+	Accomodation:
+		--usyd accomodation options
+		--usyd colleges
+	Labs
+	Tutorials
+	Lecture Theatres
+
+University Events/Societies:
+	Societies and Meet ups
+	Welcome Week
+
+University Utilities:
+	--water refil locations
+	--usyd gym memberships
+	--ATM's around campus
+	--university shopping
+
+University Help/Info:
+	--study Help
+	--student timetables
+	--Usyd staff
+
+The first student seems to have used a small number of categories with a few subcategories to condence the list into something more organsied and simple looking. 
+
+The second participant was also told that when given the lsit of categories that they could come up with categories and if needed subcategories to group the things in the list together and the responce was:
+
+University Events
+	--welcome week
+
+Transport 
+	--transport options
+
+Libraries
+	--fisher library
+	--sci tech library
+	--law library
+
+Theatres
+	--lecture theatres
+
+Gym Memberships
+	--usyd gym membership
+
+University Classes
+	--labs
+
+University Aid
+ 	--study help
+
+University Water Bubblers
+	--water refill stations
+
+University Roads
+	--eastern avenue 
+
+University Buildings 
+	--wentworth building
+
+Bars and Restaurants 
+	--hermans bar
+
+Residential Buildings 
+	--usyd colleges
+	--usyd accomodation options
+
+University Staff 
+	--usyd staff
+
+News
+	--usyd news
+
+Shops 
+	--usyd shops
+
+
+Times
+	--society meet up times
+	--restaurant opening times
+	--student timetable
+
+Maps/Locations 
+	--campus maps
+	--campus atm locations
+
+In the second participants open study they did very differently to the first participant opting to have no subcategories and choosing to have only things that were very similar grouped into the same categorie thinking the more the easier to navigate.
+
+For the third participant when given the list, I also decided to carry out another open card sort. This was because of the previous 2 attempts in an open study were very different and a third trial would give further nd hopfully clearer insight to the way in whcih students would group the categories together. The participant was told that they could use as many categories and subcategories as they want ot group the list as well as they thought they could. The results of this participant were as follows:
+
+Public Utilities:
+	Buildings:
+		--fisher library
+		--sci tech library
+		--law library
+		--wentworth building
+		--Eastern Ave
+	Accomodation:
+		--colleges
+		--accomodation options
+	Water Refil loacations
+	ATM's around campus
+	
+	
+University Resources:
+	Labs
+	Tutorials
+	Lecture Theatres
+	Study Help
+	Student timetables
+	Usyd staff
+
+Leisure Facilities:
+	Bars/Restaurants:
+		--herman's Bar
+	Gym Memberships
+	University shopping
+
+The third student decided that the best way to categorise them was to choose three braoder categories and categorising them under each one, adding sub categories if they needed to make a more obvious categorisation for part of the list. I think it is interesting that the student made an extra category for Herman's Bar as he didnt feel that it would come under the "leisure" description that he had prevoiusly defined, indicating that the student recognises that there could be many more to be added to that category.
+
+In the 4th trial I decided that this would be the closed version in which i would give the participant categories to sort th elemetns in the list into. I decided to use the categories of the first student as it was somewhat in the middle of the three, having more than trial number three but much less than trial number 2. So the categories given to this participant were: University Facilities, University Events/Societies, University Infomation, and University Utilities. The results of this trial were as follows:
+
+University Facilities:
+--fisher library
+--Herman's Bar
+--eastern ave
+--water refill
+--labs
+--wentworth
+--lecture theatres
+--sci tech library
+--law library
+
+University Utilies:
+--study help
+--gym memberships
+--atm locations
+--shops
+--accomodation
+--colleges
+
+Uni Events/Societies:
+--society meet up times
+
+Uni Infomation:
+--welcome week
+--restaurant open times
+--transport options
+--student timetable
+--staff
+--campus maps
+--news
+
+So an interesting thing about this one is that the participant only decided to use the category Events/Societies one time, making it not an overly useful category, however without the use fo sub categories some things look a little out of place, however there maintains a consistantcy of grouping of some items in the list which shows that through all the students trialed would most likely follow the same thinking pattern when looking through the categories to find what they were after. 
+
+PART 2 : Designing a prototype.
+
+Through phase one of this experiment, we saw that certain categories got grouped together in the same place with the majority of people opting for less broader categories over more. When considering the design for the app coming up, it is reccomended to look at some of the mobile UI's you enjoy using, When thinking about this I listed off the following; apple music, spotify, apple's photos & app store application along with instagram. All these UI's have a similar way in which thier data is organsied with categories along the bottom of the screen close to where the users thumb will normally be resting. These are almost always restricted to 5 categories max, with further sub categories becomeing avaliable when these braoder categories are accessed which can be exemplified when considering the app store the bottom of the page has 5 categories in a bar along the bottom; 'today','games', 'apps', 'updates', 'search'. When you access one of these categories for example 'games' you will see further categories come up on the screen including things like 'classic card games', 'top payed games' etc. 
+
+Considering the success of these platforms and the widespread knowlege of how this system works, along with the added benefit of a crossover in consumer identity (uni students), it makes sense that th uni appp being prototypes takes some inspirations from UI's such a those listed above, however it should be noted that there is a difference in purpose that the app will be built for. 
+
+taking from this the following pictures depict a paper prototype for the uni of sydney app, with the categories grouped according to how the majority of participants grouped the categories. 
+
+
+
+
+
+ 
+
+
+	
