@@ -1,0 +1,35 @@
+﻿Darby Surveys
+
+Name: Marianne Durack
+Age: 46
+Gender: F
+Occupation: Statistician
+Nationality: Australian 
+Education: Higher Education at JCU, bachelor of Economics
+Experience with Programming:    
+1: None
+2: Understanding of simple operations
+3: Have used functions/methods within programs
+4: Have produced sophisticated and advanced programs
+
+Interest in learning/advancing programming skills:
+1: No interest
+2: Vaguely interested
+3: Keen to learning and improve skills in programming
+
+Favourite features of interfaces eg. colour scheme, text, dropboxes:
+
+Easy to read, like being able to assume what things mean. Like text that’s in clear, large font, mostly black and white.
+
+Least favourite feature of interfaces:
+Advertisements everywhere, not being able to read properly, not being able to find what im looking for straight away.
+
+What device do you use the most? Eg. computer, phone tablet, laptop:
+computer and phone
+What are some websites/interfaces that you use regularly and like the design of?:
+whatsapp, NAB, google search, email
+What information would you be looking for on the website?:
+bank statements, general reference, phone numbers for contacting
+What would your goals be when on this website?:
+have the answers to questions, achieve what I want easily and quickly
+

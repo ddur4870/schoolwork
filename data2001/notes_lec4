@@ -1,0 +1,8 @@
+foreign keys are linkers
+composite primary keys can be something like for exmaple if theres a student that has a student id and a course id, they both are pointing to a different table.so composite is basically like a secondary one.
+
+can create a table and stuff with SQL but you gotta be like, CREATE TABLE tablename. Thenyou can add more contraints in there like checking a gender t have a specific condition.
+
+SQL has a join operator, makes it nicer to fmulate, but also doing the sme thing as what happened on the previous slide, but its joining multiple tables . NATURAL JOIN is another fucntion that will show the joined stuff only once in th eresult.
+
+
