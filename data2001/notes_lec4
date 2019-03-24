@@ -6,3 +6,10 @@ can create a table and stuff with SQL but you gotta be like, CREATE TABLE tablen
 SQL has a join operator, makes it nicer to fmulate, but also doing the sme thing as what happened on the previous slide, but its joining multiple tables . NATURAL JOIN is another fucntion that will show the joined stuff only once in th eresult.
 
 
+ne helpful thing that you should consider when doing data functions and stuff for exmpale COUNT, you can say 'attr' rather than '*', the difference is that the star means all of the values, and attr means all NOT NULL attibutes. 
+
+another thing: JOIN and NATURAL JOIN, the difference between the two is when the data id joined using normal join via a particular variable, for exmaple a student id, then one will have 2 rows of student id,  where as a natural joing will kinda get rid of that second useless row. 
+
+when doing an average tempreture it is best to do grouping, without grouping and jsut using the SQL to find an avergae, then for all the dates it will have the same average (as its fidning the average of everything) in order to fix this youll need to group them, by a particular attriute, like group all tempretures on the date _____ then you can average each group. then youll end up wth the crrect and variance you want in average tempreture for all thr dates.
+
+

@@ -1,0 +1,69 @@
+looking at guidlines ans styles but not in depth.
+
+as many ways to build prototype as there are to build a system.
+Websites most usefulare the paper prototype and web prototype.
+person can only hold 7 itms in their short term memory, like a register in c.s
+because of this s why like card sorts are good because you can put like 
+categories in their 'registers' which will lead them to more info behind those
+this is why youd use like open card sorts first before you start doing closed
+card sorting. If theyre thinking very differently then it makes sense to
+consider if theyre actually your target demographic.
+people read labels and group things differently based on things like the words
+so should consider this. 
+in assignment should be able to say what your navigational context is.
+Your prototype should start off at low fidelity, but not too low. Then youll
+slowly change that into a hgh fidelity prototype. 
+
+going to be looking at users you forgot
+
+about ethical usability adn all of that, for example now days tech is not like
+a marketing want anymore its more like a need for an acceptable quality of 
+life, so when theres certain groups odf people that dont have the mantal 
+models or means to have some of this tech, then it can be unethical to only
+target a certain group of people.
+This doesnt mean that it gets rid of targeting one group over another, this is
+when youre targeting something that one group will WANT to buy your products, 
+dontnhave to be useable for groups that wont want the product
+
+There are different types of users that have 'been forgotton' those with 
+either a perminent, temporary or situational imparement to one of the senses
+that are requred for the tech to be useable.
+
+for your assignment some guidelines and stuff in terms of usability legality, 
+you'll need to be following the 'w3' guidelines. 
+
+there are tools like lighthouse that check accessibility, whihc youll need to 
+consider in your assignment alongside having it useable. lighthouse basically
+just says how well a website conforms to the w3 thingo. However you must 
+realise that alot of websites just tick all the boxes without actually testing
+it so it isnt actually useable/accessible
+
+to access lighthouse you'll need chrome, you go to the three dots menu, more 
+tools > develop tools > audits > accessibility > run audits . will process
+the way it loads ans astuff everything it fails or doesnt go well in will have
+a description. this is advanced and will be unliekly a new HTML perosn will
+be able to get a score of 100. 
+
+theres also more useablity stuff not jsut for impared people but for people 
+with a different situations. LOCALISATION is designing to account for differen
+cultures and all that. GLOBALISATION is accounting for differences across
+many diverse locations and cultures. exmpales include language, date format, 
+tempreture and measuremtns, reading way
+
+there are less obvious exclusoons that can harm usability are, refernces to 
+pop culture, slang like 'sticky beak', analogies and idioms, politics, 
+geographical features and places. 
+
+WCAG is a example of a guide about useability and crating different types of
+websites, theres different guides to suit different types of peopel, however
+you should always  break the rules and that when your target isnt the same. 
+
+remeber that guides are generally written for all people when your website
+will opften be like for only a particular set of people. 
+
+conventions should be bvrokenwhen they  cause things to happen that are 
+unexpected, when the users are used to a convention and when they expect 
+convention and you dont give it to them then they wont be happy, the user
+will draw their convention form other websites.
+
+
