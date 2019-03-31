@@ -1,0 +1,69 @@
+import node
+import tree_interface
+
+class RangeSizeTree(tree_interface.RSTreeInterface):
+	def __init__(self):
+		self.root = None
+		self.current_node = self.root
+	def put(self, k):
+		if self.root==None:
+			print("the root is None")
+			self.root = k
+			print("not any more lol its " + str(k)+"with key of: "+str( k.get_key()))
+		else:
+			if self.root.get_right() == None  and self.root.get_left()== None:
+				print("you are the very first subnode")
+				k.set_parent(self.root)
+				self.root.increment_subtree()
+				if(k.get_key() > self.root.get_key()):
+					self.root.set_right(k);
+				else:
+					self.root.set_left(k);
+
+	def get(self, k):
+		if(self.current_node == None):
+                	return "mission failed, no root, no tree"
+		if(self.current_node().get_key() == k):
+                #temp variable store and then reset the current node to top
+			temp = self.current_node()
+			self.current_node = self.root()
+			return temp
+		elif(k<self.current_node().get_key()):
+			next_left = self.current_node().get_left()
+			self.current_node = next_left
+			return get(self,k)
+		else:
+			next_right = self.current_node().get_right()
+			self.current_node = next_right
+			return get(self,k)
+
+	def remove(self, k):
+        	pass
+
+	def range_size(self, a, b):
+		pass
+
+################################################################################
+# The following functions are not tested
+# They are provided for you to run and test.
+################################################################################
+
+def main():
+	my_tree = RangeSizeTree()
+	first_node = node.Node(1)
+	second_node = node.Node(2)
+	my_tree.put(first_node)
+	my_tree.put(second_node)
+	print("first nodes right: "+str(first_node.get_right()))
+	print("first nodes left: "+ str(first_node.get_left()))
+	if first_node.get_right() != None:
+		print(str(first_node.get_right().get_key()))
+	if first_node.get_left() != None:
+		print(str(first_node.get_left().get_key()))
+	print("attempt to find key 2")
+	print(str(my_tree.get(my_tree,2)))
+
+if __name__ == "__main__":
+    print("Running main method of RangeSizeTree")
+    main()
+    

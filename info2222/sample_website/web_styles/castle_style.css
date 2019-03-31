@@ -1,0 +1,10 @@
+/* Basic table setup */
+table {
+  font: 1em sans-serif;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+h1{
+	color:blue;
+}

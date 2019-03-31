@@ -1,0 +1,35 @@
+body,html{
+	text-align: centre;
+	margin: 0;
+	width: 90%;
+	height: 100%;
+	font: 400 15px/1.8 "Lato", sans-serif;
+	color: #777;
+}
+
+}
+img{
+	border-radius: 8px;
+	max-width: 90%;
+	height: auto;
+}
+.parallax1{
+	background-image: url("beach-macs.JPG");
+	min-height: 100%;
+}
+.parallax2{
+	background-image: url("beach2_macs.jpg");
+	min-height: 400px;
+}
+.parallax3{
+	background-image: url("beach3_macs.jpg");
+	min-height: 400px;
+}
+.parallax1, .parallax2, .parallax3{
+	opacity: 0.65;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
