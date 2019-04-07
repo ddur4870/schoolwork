@@ -1,0 +1,95 @@
+/* 
+ * Messaging Style adapted from :
+ * https://www.w3schools.com/howto/howto_css_chat.asp 
+*/
+
+
+
+.messageForm {
+    display: none;
+    text-align: center;
+    /* Just to center the form on the page */
+    margin: 0 auto;
+    width: 310px;
+    /* To see the outline of the form */
+    padding: 10px;
+    border: 1px solid #6c6c6c;
+    border-radius: 1px;
+    padding-bottom: 0px;
+}
+#newMessageBut{
+    padding-bottom: 10px;
+}
+#newMessageBut, #buttons{
+    text-align: center;
+    text-decoration: none;
+}
+.newMessageButton, .btn{
+    display:inline-block;
+    padding: 0.7em 1.4em;
+    margin: 0.3em 0.3em 0.3em 0.3em;
+    box-sizing: border-box;
+    color:white;
+    background-color:#5eaaf5;
+    box-shadow:inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.023);
+    position:relative;
+}
+    
+label {
+    /* To make sure that all labels have the same size and are properly aligned */
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+}
+
+input, textarea {
+    /* To give the same size to all text fields */
+    width: 300px;
+    box-sizing: border-box;
+    font-size: 20px;
+    padding: 10px;
+
+    /* To harmonize the look & feel of text field border */
+    border: 1px solid #6c6c6c;
+    border-radius: 1px;
+}
+    
+input:focus {
+    /* To give a little highlight on active elements */
+    border-color: #000000;
+}
+
+/* Chat containers */
+.container {
+    border: 1px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 1px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+/* Clear floats */
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Style sender */
+.container .sender {
+    float: left;
+    text-align: center;
+    vertical-align: -webkit-baseline-middle;
+    font-size: 10px;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border: solid black 1px;
+    padding: 5px;
+}
+
+/* Style time text */
+.time {
+    float: right;
+    color: #aaa;
+  }

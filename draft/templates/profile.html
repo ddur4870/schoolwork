@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="css/profile.css">
+<script src="js/profile_script.js"></script>
+
+<h1 id="title">{name}'s Profile</h1>
+
+<p id="age"><b>Your Age:</b> {age}</p>
+
+<br>
+
+<div>
+    <p id="bioTitle"><b>A little bit about you:</b></p>
+    <button id="open-button" onclick="openForm()">Edit Your Bio</button>
+</div>
+<p id="bio">{bio}</p>
+
+<br>
+
+<div id="logout">
+        <a href='/logout'>Log Out</a>
+</div>
+
+<br>
+
+<div class="editForm" id="editForm">
+    <form action="/newBio" method="post">
+        <label><b>New Bio:</b></label>
+        <input type="text" placeholder="New Bio" name="new_bio" required>
+        <div id="btns">
+            <button type="submit" class="btn">Save</button>
+            <button type="reset" class="btnCancel" onclick="closeForm()">Close</button>
+        </div>
+    </form>
+</div>

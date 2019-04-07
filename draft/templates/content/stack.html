@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="css/content.css">
+
+<h1>
+    TCP/IP Stack
+</h1>
+
+<p>
+    <b>TCP/IP</b> (or, <i>Transmission Control Protocol/Internet Protocol</i>) is a suite of networking protocols. This is used extensively to interconnect network devices across the internet. This can also be used to establish communication within a private network, whether that be <i>intranet</i> or <i>extranet</i>. In order for the group to effectively develop a website, it is imperative that we are aware of these protocols to conform to the formats and rules of websites.
+</p>
+
+<p>
+    The TCP/IP stack can be broken down further, into both TCP and IP. 
+</p>
+
+<ul>
+	<li>The <b>TCP</b> aspect of the protocol acts on the transport layer, and is responsible for dividing data into <i>smaller data segments</i>. These are directed to a specific port used by an application or program on the respective request machine</li>
+    <li>The <b>IP</b> protocol operates of the <i>network layer</i>, and this protocol is responsible for ensuring that <i>data packets</i> arrive at its destination. This address is determined via the IP addresses of the host and request machines. This is done by <b>routing</b> the packets using a <i>routing table</i>. This table keeps track of all paths to a specific IP address.</li>
+</ul>
+<img src="img/osi_tcpip_modelDiagram.jpg" style="height:40%">
+
+<p>
+    When these two protocols work in conjunction, it enables data packets to arrive at the destination to arrive out of order. This allows for packets to take the fasted possible path that exists within the system. Error checking is done on each packet once it arrives at its destination. 
+</p>
+
+<p>
+    The TCP/IP model runs on a <b>client/server model</b>. This definition means that once the client requests data from the webpage, the host server will then work to send that requested information to the client. 
+</p>
+
+<p>
+    This model definition can be expanded using routing. TCP/IP is considered '<i>stateless</i>’. This means that all data packets are sent independently of each other; they’re not dependent on any other variable. This is what enables for packets to travel down different (but always the fastest) communication paths.
+</p>
+
+<p>
+    This is a ‘simplified’ version of the internationally recognised <b>OSI Model</b>, which outlines each separate layer required to complete a full communication link. The TCP/IP model completes these layers in leaps and bounds, enabling this simplification to be covered in many less layers. This in turn allows for even quicker distribution of information over the internet. 
+</p>
+
+<p>
+    These layers all include their own layer protocols, which acts as a means of communication between successive protocols. 
+</p>
+
+<ul>
+	<li><b>Application Layer</b>: This layer is responsible for the node-to-node communication, as well as controlling user-interface specifications. Examples include;</li>
+		<ul>
+			<li>HTTP - <i>Hypertext Transfer Protocol</i></li>
+			<li>FTP - <i>File Transfer Protocol</i></li>
+			<li>SMTP - <i>Simple Mail Transfer Protocol</i></li>
+		</ul>
+	<li><b>Transport Layer</b>: This layer is responsible for end-to-end communication of data, and its error-free delivery. The two main examples include;</li>
+		<ul>
+			<li><i>Transmission Control Protocol (TCP)</i></li>
+			<li><i>User Datagram Protocol (UDP)</i></li>
+		</ul>
+	<li><b>Network Layer</b>: This layer handles the logical transmission of data over the entirety of the network. Examples include;</li>
+		<ul>
+			<li>IP - <i>Internet Protocol</i></li>
+			<li>ARP - <i>Address Resolution Protocol</i></li>
+			<li>ICMP - <i>Internet Control Message Protocol</i></li>
+		</ul>
+	<li><b>Physical Layer</b>: This layer is responsible for specifying the hardware aspects of the communication of data used within the network. This layer holds standards, such as the IEEE 802.3, the specification for Ethernet network media.</li>
+</ul>

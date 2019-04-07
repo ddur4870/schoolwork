@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="css/form.css">
+
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  You must login before accessing your {error}.
+</div>
+
+<h2>Login with a username and password below</h2>
+
+<form action="/login" method="post">
+    <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="user_name" required>
+    </div>
+    
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" name="user_password" required></input>
+    </div>
+
+    <div class="button">
+      <button type="submit">Login</button>
+    </div>
+</form>
+
+<br>
+
+<div id="yeet">
+  <a href="/register">Dont have an account? Register for an account now!</a>
+</div>
+
+<script>
+  if({error} !== "noError"){{
+    $(".alert").slideDown("slow");
+  }}
+</script>

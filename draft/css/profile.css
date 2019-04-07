@@ -1,0 +1,68 @@
+
+#title {
+    text-align: center;
+}
+
+#logout {
+    text-align: center;
+}
+#logout a{
+    text-decoration: underline;
+    color: black;
+}
+
+#logout a:hover {
+    color: #5eaaf5;
+}
+
+#bioTitle {
+    display: inline-block;
+}
+
+#bio{
+    
+}
+
+#open-button {
+
+}
+
+.editForm {
+    display: none;
+    /* Just to center the form on the page */
+    margin: 0 auto;
+    width: 380px;
+    /* To see the outline of the form */
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+}
+    
+label {
+    /* To make sure that all labels have the same size and are properly aligned */
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+}
+
+input {
+    /* To make sure that all text fields have the same font settings
+        By default, textareas have a monospace font */
+    font: 1em sans-serif;
+
+    /* To give the same size to all text fields */
+    width: 300px;
+    box-sizing: border-box;
+
+    /* To harmonize the look & feel of text field border */
+    border: 1px solid #999;
+}
+    
+input:focus {
+    /* To give a little highlight on active elements */
+    border-color: #000000;
+}
+
+#btns {
+    text-align: center;
+}

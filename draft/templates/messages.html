@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="css/messages.css">
+<script src="js/message_script.js"></script>
+
+<h1 style="text-align: center">{name}'s Messages</h1>
+
+<div id="newMessageBut">
+    <button class="newMessageButton" onclick="openForm()">Send A New Message</button>
+</div>
+
+<div class="messageForm" id="messageForm"> 
+    <form action="/newMessage" method="post">
+        <div>
+        <!-- <label for="recipient">To:</label> -->
+        <input type="text" id="recipient" name="recipient" placeholder="To:" required>
+        </div>
+
+        <div>
+        <!-- <label for="message">Message:</label> -->
+        <textarea rows = "5" cols = "50" name = "message" placeholder="Your Message" wrap="soft"></textarea>
+        </div>
+
+        <br>
+        
+        <div class="buttons">
+        <button type="submit">Send</button>
+        <button type="reset" class="btnCancel" onclick="closeForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<div id="messagesContainer">
+    
+</div>
+
+<script>
+    var data = {messages};
+    var container = document.getElementById("messagesContainer");
+    data.reverse().forEach(mm => {{
+        var div = document.createElement("div");
+        div.classList.add("container");
+
+        var sender = document.createElement("p");
+        sender.classList.add("sender");
+        sender.innerHTML = "<b>From: </b>" + mm[1];
+        div.appendChild(sender);
+
+        var message = document.createElement("p");
+        message.innerHTML = mm[3];
+        div.appendChild(message);
+
+        var time = document.createElement("span");
+        time.classList.add("time");
+        time.innerHTML = mm[4];
+        div.appendChild(time);
+
+        container.appendChild(div);
+    }});
+    console.log(data)
+</script>

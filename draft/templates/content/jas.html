@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="css/content.css">
+
+
+<h1>
+	JavaScript
+</h1>
+<p>
+	JavaScript (JS) is a dynamic scripting language that allows interactivity to exist within a static, HTML website. This essentially means that if it moves, refreshes or interacts with the webpage, it is run via JS. As mentioned before, it is a scripting language. But what is a script?  A scripting language is a language that can be used to automate many of the process that a user would otherwise have to execute manually. This means that the user can focus more on what is happening, than <i>how</i> to make it happen.
+</p>
+<h2>
+	How does JavaScript work within a Web Browser?
+</h2>
+<p>
+	1. The browser reads in, or parses, the script <br>
+2. Converts, or compiles, the script into machine language, or computer language <br>
+3. User machine runs it, very fast
+</p>
+<p>
+	The search engine will attempt to optimise each step of this process. In-browser JavaScript can edit anything relating to the web page, manipulating data, interacting with the user, the webs server. Newer versions of JavaScript cannot directly access files or commands from the OS of the system. This improves the security of the overall system.
+</p>
+<h2>
+	Example: 
+  <table>
+    <tr>
+      <td>
+        <mark class="red">var</mark> <mark class="blue">x</mark>, <mark class="blue">y</mark>, <mark class="blue">z</mark>; 
+         //Declares variables to be used
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mark class="blue">x</mark> = <mark class="green">6</mark>; 
+        <mark class="blue">y</mark> = <mark class="green">7</mark>;
+         //Assigns values to the variables
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mark class="blue">z</mark> = <mark class="blue">x</mark> * <mark class="blue">y</mark>;
+         //Computes a variable using variables
+      </td>
+    </tr>
+  </table>
+</h2>
+<p>
+	A script can be imported in the following way. 
+</p>
+<table>
+  <tr>
+      <td>< <mark> script </mark>  <mark class="blue">src</mark>=<mark class="green">"script/file.js" </mark> >     < <mark> /script </mark> >
+      </td>
+  </tr>
+</table>
+
+
+<h1>
+    NodeJS
+  </h1>
+  <p>
+    NodeJS is an asynchronous web framework for JavaScript which allows for websites to have multiple users executing commands concurrently. This is due to the clean NodeJS functions, which has no direct input/output requirements. This means that there won’t be a backlog of data to process on the server system when multiple users are completing similar user functions and actions.
+  </p>
+  <h2>
+    Your First Program
+  </h2>
+  <p>
+    When creating files with NodeJS, it is important to include the tag “.js” at the end of the filename in order for your program to be executed. The example code below allows you to print “Hello World” to the screen if anyone attempts to access your computer on the port 8080.
+  </p>
+  <table>
+    <tr>
+      <td><mark class="blue">  var  </mark> http = require(<mark>'http'</mark>);</td>
+    </tr>
+     <tr>
+      <td>  http.createServer(<mark class="blue">function</mark> (req, res) {{ </td>
+    </tr>
+    <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp; res.writeHead(200, {{<mark>'Content-Type': 'text/html'</mark>}});</td>
+    </tr>
+    <tr>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;  res.end(<mark>'Hello World!'</mark>);</td>
+    </tr>
+    <tr>
+      <td>}}).listen(<mark>8080</mark>);</td>
+    </tr>
+  </table>

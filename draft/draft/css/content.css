@@ -1,0 +1,58 @@
+h1 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+h2 {
+    font-family: 'Helvetica Neue', sans-serif;
+	font-size: 20;
+    font-weight: bold;
+}
+
+p {
+    text-align:justify;
+    font-family: 'Helvetica Neue', sans-serif;
+    line-height: 1.85;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+li {
+    text-align:justify;
+    font-family: 'Helvetica Neue', sans-serif;
+    line-height: 1.85;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+table {
+    font-family: courier, sans-serif;
+    color: black;
+    width: 99%;
+    margin-left: 0px;
+    margin-top: 10px;
+    background: #f1f1f1;
+    border: solid 15px #f1f1f1;
+}
+
+mark {
+    color: red;
+    background: none;
+}
+
+mark.blue {
+    color: #2471A3;
+    background: none;
+}
+
+mark.green {
+    color: green;
+    background: none;
+}
+
+img {
+    display: block;
+    height: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}

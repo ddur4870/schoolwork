@@ -1,0 +1,16 @@
+
+.mainLogo{
+    text-align: center;
+}
+
+.mainLogo img{
+    height: 58%;
+}
+
+.welcome{
+    text-align: center;
+}
+
+.welcome h1{
+    font-size: 50px;
+}

@@ -1,0 +1,120 @@
+h1 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+h2 {
+    font-family: 'Helvetica Neue', sans-serif;
+	font-size: 20;
+    font-weight: bold;
+}
+
+p {
+    text-align:justify;
+    font-family: 'Helvetica Neue', sans-serif;
+    line-height: 1.85;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+li {
+    text-align:justify;
+    font-family: 'Helvetica Neue', sans-serif;
+    line-height: 1.85;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*-----------------This is for the codeblock structure-------------------*/
+
+table.codeblock {
+    font-family: courier, sans-serif;
+    color: white;
+    width: 99%;
+    margin-left: 0px;
+    margin-top: 10px;
+    background: #2b2b2b;
+    border: solid 15px #2b2b2b;
+}
+
+
+
+/*-----------------This is for the codeblock colours-------------------*/
+mark {
+    color: red;
+    background: none;
+}
+
+mark.blue {
+    color: #00FFFF;
+    background: none;
+}
+
+mark.green {
+    color: #33FF00;
+    background: none;
+}
+
+mark.terminalgreen {
+    color: #33FF00;
+    background: none;
+}
+
+mark.purple {
+    color: #9370DB;
+    background: none;
+}
+
+img {
+    display: block;
+    height: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+/*-----------------This is for the breadcrumbs-------------------*/
+/* Style the list */
+ul.breadcrumb {
+  text-align: right;
+}
+
+/* Display list items side by side */
+ul.breadcrumb li {
+  display: inline;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li+li:before {
+  padding: 8px;
+  content: ">";
+}
+
+/* Add a color to all links inside the list */
+ul.breadcrumb li a {
+  color: #5eaaf5;
+  text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+  color: #0080ff;
+  text-decoration: underline blue;
+}
+
+/*-----------------This is for the footer WIP -------------------*/
+.footer {
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: grey;
+   color: white;
+   text-align: center;
+}
+
+table.footer {
+    background: grey;
+    color: white;
+}

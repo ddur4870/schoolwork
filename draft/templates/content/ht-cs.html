@@ -1,0 +1,166 @@
+<link rel="stylesheet" href="css/content.css">
+
+
+<h1>
+	HTML/CSS
+</h1>
+
+<p>
+	<b>H</b>yperText <b>M</b>arkup <B>L</B>anguage, or HTML, is the code and language used to develop the structure and form of a website. This works in conjunction with <b>C</b>ascading <b>S</b>tyle <b>S</b>heets, or CSS, which gives this structure style, aesthetic appeal and an eye-catching appearance. 
+</p>
+
+<h2>
+	More on HTML
+
+</h2>
+
+<p>
+	The foundational characteristic of HTML is its use of <b><i>Markup.</i></b> This enables encapsulation of certain data to inherit certain aspects of that markup. These are also commonly known as tags, which are constructed using elements.
+</p>
+
+<h2>
+	Elements
+</h2>
+
+<p>
+	These designate the definitions of the structure and the content of objects within the webpage. Common elements include heading allocation elements ( h1, h2, ... , hn elements) and the paragraph element ( p ).
+	
+	This can be identified and established with an opening ‘less than’ sign ( < ), and ending in the ‘greater than’ sign ( > ). Both of these should appear on either side of the element name. An example can be seen below.
+<table>
+  <tr>
+    <td>< <mark>  h1  </mark> ></td>
+  </tr>
+</table>
+</p>
+
+<h2>
+	Tags
+</h2>
+<p>
+	A HTML element usually consists of a start and end tag, encapsulating the content to be affected. 
+	The opening tag is created as the element, beginning with a less than sign, elements name, then the greater than sign.
+</p>
+
+<table>
+  <tr>
+    <td>< <mark>  p  </mark> ></td>
+  </tr>
+</table>
+
+<p>
+	Then to close this, the same thing is applied. However, there is a forward slash placed before the element name.
+<table>
+  <tr>
+    <td>< <mark>  /p  </mark> ></td>
+  </tr>
+</table>
+</p>
+
+<p>
+	When this is put together, anything in between the opening and closing tags will have the element name applied to it. For example;
+<table>
+  <tr>
+      <td>< <mark>  p  </mark> > This is a paragraph. < <mark>  /p  </mark> > </td>
+  </tr>
+</table>
+</p>
+
+<p>
+This example will apply the p, or paragraph, attributes onto the content in between the tags. This simple yet effective means for marking content with a specific tag allows for the organisation and separation of data.
+</p>
+
+<h2>
+	Attributes
+</h2>
+<p>
+	Attributes are placed within the opening tag, after the elements name. This adds additional properties to the element. An attribute generally includes an attribute name, and an attribute value. An example of this can be seen below;
+	<table>
+  <tr>
+    <td>< <mark>  p align=”center”  </mark> > This paragraph will be centered.< <mark>  /p  </mark> ></td>
+  </tr>
+</table>
+</p>
+
+<img src="/img/tag_described.jpg">
+<h2>
+	Building a Website
+</h2>
+<p>
+	HTML must be initially set up in a certain way. An example can be seen below.
+<table>
+  <tr>
+      <td>< <mark> !DOCTYPE html </mark>></td>
+  </tr>
+  <tr>
+    <td>< <mark>  html  </mark> ></td>
+  </tr>
+    <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;< <mark>  head  </mark> ></td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;< <mark>  title  </mark> > Hello World! < <mark>  /title  </mark> ></td>
+  </tr>
+    <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;< <mark>  /head  </mark> ></td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;< <mark>  body  </mark> ></td>
+  </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;< <mark>  p  </mark> > Hello World, again! < <mark>  /p  </mark> ><//p></td>
+  </tr>
+    <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;< <mark>  /body  </mark> ></td>
+  </tr>
+ </tr>
+    <tr>
+    <td>< <mark>  /html  </mark> ></td>
+  </tr>
+</table>
+</p>
+
+<ul>
+	<li>!DOCTYPE html - Line 1 is a document declaration type, which informs the browser which version of HTML is going to used from thereon. </li>
+	<li>html - Line 2 informs the beginning of the html document</li>
+	<li>head - Establishes special parameters of the website</li>
+	<ul>
+		<li>title - Changes the tab name to what you allocate it to be</li>
+	</ul>
+	<li>body - Establishes the body of the document</li>
+	<li>p - Specifies the area to be in paragraph form</li>
+</ul>
+<h2>
+	More on CSS
+</h2>
+<p>
+	CSS dictates the appearance of a website. CSS can be implemented in three main ways:
+</p>
+<ul>
+	<li>External style sheet</li>
+	<li>Internal style sheet</li>
+	<li>Inline style</li>
+</ul>
+<p>
+	The easiest way to manage a website is to use an external style sheet. From this single style, it single handley holds all the power to change its looks. To do so, the HTML page must make a direct link to the style sheet to be used. This can be done in a single line, as seen below:
+	<table>
+  <tr>
+    <td>< <mark>  head  </mark> ></td>
+  </tr>
+  <tr>
+      <td>< <mark>  link  </mark> <mark class="blue">rel</mark>=<mark class="green">"stylesheet" </mark><mark class="blue">type</mark>=<mark class="green">"text/css" </mark><mark class="blue">href</mark>=<mark class="green">"style.css"</mark> ></td>
+  </tr>
+    <tr>
+    <td>< <mark>  /head  </mark> ></td>
+  </tr>
+</table>
+</p>
+<p>
+	CSS provides the user a means of giving particular tags certain global attributes. Let’s take the following example.
+</p>
+<img src="/img/CSS_description.jpg">
+<p>
+	The selector selects the tag to be edited. In this case, it’s the paragraph (“p”) tag. Each tag has specific attributes associated with them. This property can be added within the curly brackets. Once this is done, edits can be made to the value of this property. As seen about, the paragraphs tag will have font colour of red and be of font-size 12. 
+</p>
+<p>
+	As mentioned before, this would change <b>all</b> p tags within the HTML document, making style changes easy and global.
+</p>

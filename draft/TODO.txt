@@ -1,0 +1,10 @@
+
+profile page look nice
+login look nice
+register look nicer
+
+messages error handling
+
+redo errors as pop ups instead of pages
+
+home page

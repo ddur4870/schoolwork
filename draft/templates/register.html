@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="css/form.css">
+
+<h1>Register Your Account</h1>
+
+<form action="/register" method="post">
+    <div>
+    <label>Your Name:</label>
+    <input type="text" id="name" name="user_name" required>
+    </div>
+    
+    <div>
+      <label>Password:</label>
+      <input type="password" name="user_password" required></input>
+    </div>
+
+    <div>
+        <label>Confirm Password:</label>
+        <input type="password" name="user_password_confirm" required></input>
+    </div>
+
+    <div>
+      <label>Your Age:</label>
+      <input type="number" name="user_age" min="16" required></input>
+    </div>
+
+    <div class="button">
+      <button type="submit">Register</button>
+    </div>
+
+</form>
+
+<h3 style="text-align: center">How to register:</h3>
+<div>
+  <dl>
+    <dt id="infoTitle">Your Name</dt>
+      <dd>- This is the name that will appear through out the website, including in messages.</dd>
+      <dd>- This is the name you use to sign in to the website.</dd>
+      <dd>- Check spelling and dont forget to capitalise!</dd>
+    
+    <dt id="infoTitle">Your Age</dt>
+      <dd>- You must be older than 16 to make an account.</dd>
+
+    <dt id="infoTitle">Your password</dt>
+      <dd>- This is the password you use to sign in to the website.</dd>
+      <dd>- It must contain one capital letter.</dd>
+      <dd>- It must contain one number.</dd>
+      <dd>- It must be longer than 6 characters.</dd>
+  </dl>
+</div>

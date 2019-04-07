@@ -1,0 +1,8 @@
+
+profile page look nice
+login look nice
+register look nicer
+
+breadcrumbs
+
+messages error handling

@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="css/content.css">
+
+<h1>
+	Python
+</h1>
+
+<p>
+    Python, used in applications such as software development, web development and system scripting, is a english-based language. Known for its readability, Python depends on whitespace and indentation, and utilises new lines to complete a command, unlike other languages that use parentheses or semi-colons.
+</p>
+
+<h2>
+	Your First Program
+</h2>
+
+<p>
+	When creating Python files, a developer must include the tag “.py” to the end of the file and type these files into the Python interpreter to be executed, as seen in the example below:
+From here, we can write our very first Python program using command-line arguments.
+</p>
+
+<p>
+	The method “sys.argv” is a list that includes the contents provided in the command-line. It is important to remember that the indexes of the command-line starts at zero, with the program name at index 0 and the arguments at index 1 and beyond. With this information, we can create our first program:
+</p>
+<P>
+	The “sys” module must be imported in order for “sys.argv” to be used, and within this program, it is utilised in order for the arguments to be accessed from the command-line. In order to execute this code, you must enter these commands into the command-line:
+<table>
+  <tr>
+    <td><mark class="purple">  import  </mark> sys</td>
+  </tr>
+   <tr>
+    <td><mark>  print</mark>("Hello " + <mark class="blue">sys.argv</mark>[<mark>1</mark>]) </td>
+  </tr>
+</table>
+</P>
+
+<p>
+	This allows the python interpreter to run the code you have provided within your file, and allows it to also include the argument that is also provided within the command-line. 
+</p>
+
+<table>
+  <tr>
+    <td><mark class="terminalgreen"> [user@sahara ~]$ python3  < filename >.py  < Your Name ></Your></filename>  </mark></td>
+  </tr>
+</table>
+
+<h2>
+	Basic Data Types in Python
+</h2>
+
+<p>
+	<b>Integer</b> - Whole numbers that have no limit to how long they can be eg. 1, -234, 777777777777, 60000 <br>
+	<b>Float</b> - floating point numbers are numbers that include a decimal point eg. 0.1, 2.34, 56.906 <br>
+	<b>String </b> - Strings are characters grouped together and are delimited using single (‘’) or double (“”) quotation marks eg. “hello”, ‘hello’, “The weather is hot today.” <br>
+	<b>Boolean</b> - Boolean values are either True or False and are usually used within condition statements. 
+</p>
+
+<h1>
+	Bottle
+</h1>
+<p>
+	Bottle is a Python Web Framework. This fast, simple and lightweight Web Server Gateway Interface allows for the easy implementation of web servers. The qualities described previously are thanks to this module having no dependencies other than the Python standard library (the default python library). Below is an example of a dynamic URL, which says “Hello name”, depending on the user input in the URL. This has many various applications in larger projects.
+</p>
+<table>
+  <tr>
+    <td>
+        <mark class="purple">from</mark> bottle <mark class="purple">import</mark> route, run, template
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <mark>@route</mark>('<mark class="terminalgreen">/hello/< name ></mark>')
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <mark class="purple">def</mark> <mark class="blue">index</mark>(<mark class="terminalgreen">name</mark>):
+    </td>
+  </tr>
+  <tr>
+    <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;<mark class="purple">return</mark> <mark class="blue">template</mark>(<b><mark class="terminalgreen">'Hello {{name}}!'</mark></b>, name=<mark class="terminalgreen">name</mark>)
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <mark class="purple">run</mark>(host=<mark class="terminalgreen">'localhost'</mark>, port=<mark class="terminalgreen">8080</mark>)
+    </td>
+  </tr>
+</table>
+<h1>
+	Flask
+</h1>
+<p>
+	Flask, like Bottle, is also a Python Web Framework. However, it includes many more features that allows the user to ‘fine-tune’ and edit more aspects of the website functionality and usability. It supports a wide range of database structures to be implemented into the roots of the website server. This enables developers to have more range with their choices in deciding which algorithms and datastructures are required to be developed for future features of the current (or in development) website. Flask also has no external dependencies. 
+</p>
+<p>
+	Flask allows for the use of templates to be easy implemented. Have you ever wanted to make a small, but global edit to a website? By editing the template, this can easily and quickly be achieved. This can save a lot of time, which can be put to better use in the future. 
+</p>
