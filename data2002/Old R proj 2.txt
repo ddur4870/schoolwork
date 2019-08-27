@@ -1,0 +1,1025 @@
+---
+title: "Proj2"
+author: "Darby Durack, Alan Burzevski, Gio Marco Ferrer Picones, Yexin Mao"
+date: "5/2/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r,echo=FALSE, message = FALSE, warning=FALSE, include=FALSE}
+library(readr)
+sydneyuni = read.csv("/Users/alanburzevski/Desktop/DATA1001files/DATA1001/data/FLEXBOIZ2.csv")
+```
+
+#**How do University of Sydney Students perceive the quality of their education?**
+
+
+#*Introduction*
+Fundamentally, universities are businesses, with education and the student experience being the product that is sold, and the student body being the consumer. As is true with all businesses models, customer satisfaction is a key indicator of a productâ??s quality, and is vital for the continued existence and growth of the business in question.
+
+https://www.smh.com.au/politics/federal/revealed-australias-most-and-least-satisfied-university-students-20170411-gvibbd.html
+
+According to an article by the Sydney Morning Herald, The University of Sydney (along with 5 other universities from the Go8) scored below the national average of an 80% satisfaction rate, with the University of Sydney (henceforth to be referred to as the University) scoring 76.7%, coming in 36th in a list of 40 universities. 
+
+Keeping in mind the Universityâ??s low relative satisfaction rate, this paper aims to identify its key areas of excellence and areas of underperformance, purely in terms of student perception, with students at the University being our survey participants. 
+
+This will then help the governing body make informed decisions in terms of defining long-term strategy (which might include curriculum overhauls, major construction projects for new buildings, etc), budget allocation, and ultimately, how to provide a better education and student experience.
+
+In the context of this paper, the â??key areasâ?? referred to above are broadly categorised into the following 4 metrics, with our survey results serving as an indicative measure of each.
+
+â?¢	Quality of Student Services/Facilities
+â?¢	Quality of Course/Course Content
+â?¢	Quality of Teaching
+â?¢	Quality of Extracurricular Activities
+
+
+#*Results*
+
+
+##Research Question 1: How satisfied are University of Sydney students with the teaching facilities provided to them?
+
+
+###**Hypothesis**
+There will be a mixed result of both satisfied and unsatisfied students.
+
+###**Defining Variables**
+
+- Overall Satisfaction - Students' overall satisfaction with the university on a scale of 1-10.
+- IT Quality - Students' perception of the overall quality of IT services such as Canvas and Ed on a scale of 1-10.
+- ITEase - Students' perception of the overall ease of use of IT services such as Ed and Canvas on a scale of 1-10.
+- IT Reliability - Students' perception of the overall reliability of IT services such as Ed and Canvas on a scale of 1-10.
+- Degree Faculty - The faculty that the individual's degree belongs to.
+- Teaching Space Quality - The percieved quality of teaching spaces such as lecture theatres, tut rooms ect. on a scale of 1-10.
+- EquipmentQuality - The percieved quality of equipment such as computers, lab equipment ect. on a scale of 1-10.
+- Study Area Satisfaction - How satisfied a student is with the general quality of study areas and libraries on a scale of 1 to 10.
+- Study Area Space Ease - How easily a student is able to find a space to study in the learning areas at uni on a scale of 1-10.
+- Learning Centre Acknowledgement - Whether a student has been to the university's designated learning centres (yes, no or haven't heard of it)
+
+###**Clasisfying Variables**
+
+- Overall Satisfaction - Qualitative Ordinal
+- IT Quality - Qualitative Ordinal
+- IT Ease - Qualitative Ordinal
+- IT Reliability - Qualitative Ordinal
+- Degree Faculty - Qualitative Nominal
+- Teaching Space Quality - Qualitative Ordinal
+- EquipmentQuality - Qualitative Ordinal
+- Study Area Satisfaction - Qualitative Ordinal
+- Study Area Space Ease - Qualitative Ordinal
+- Learning Centre Acknowledgement - Qualitative Nominal
+
+###**Any alterations to data (removing outliers etc.)**
+No alterations to data.
+
+###**Trends**
+
+```{r,echo=FALSE, message = FALSE, warning=FALSE}
+library(ggplot2)
+p=ggplot(sydneyuni, aes(x=OverallSatisfaction))
+p+geom_bar()
+```
+
+From this graph we can see that of the 79 survey replies, the most common survey responses are around the 7 to 8 mark; so overall, the university seems to have an average satisfaction score of around 7-8/10. 
+
+```{r}
+satisfaction= sydneyuni$OverallSatisfaction
+breaks=c(0,1,2,3,4,5,6,7,8,9,10)
+table(cut(satisfaction, breaks, right=F))
+hist(satisfaction, br = breaks, freq = F, right = F, xlab = "overall satisfaction (1-10)", ylab = "% of data", 
+    main = "Histogram for Overall satisfaction with the university (2018)")
+```
+From the histogram it can be seen that over 72% of students participating in the survey rated their overall satisfaction as higher than 8/10. 
+
+This is further seen in the subsequent table:
+```{r}
+satisfaction=sydneyuni$OverallSatisfaction
+summary(satisfaction)
+```
+
+
+```{r}
+OverallSatisfaction=sydneyuni$OverallSatisfaction
+ITsatisfaction = sydneyuni$ITQuality
+plot(ITsatisfaction, OverallSatisfaction, xlab = "IT satisfaction", ylab = "Overall Satisfaction",main="Correlation Between IT services satisfaction and Overall Satisfaction")
+points(mean(ITsatisfaction), mean(OverallSatisfaction), col = "indianred", pch = 19, cex = 2)  
+legend("topright", c("point of averages (centre)"), col = "indianred", pch = 19)
+cor(ITsatisfaction,OverallSatisfaction)
+abline(2.7237095, 0.5713708)
+```
+As we can see there is a loose but noticeable correlation between the IT service satisfaction and Overall satisfaction. In general, the case seems to be that if the student considers the IT services to be satisfactory, then that student is more likely to be satisfied with the universty as a whole. Although there is some correlation, the correlation coefficient is ~0.54, so the correlation is not very strong.
+
+```{r}
+ITsatisfaction=sydneyuni$ITQuality
+ease=sydneyuni$ITEase
+realiability=sydneyuni$ITReliability
+cor(ITsatisfaction, ease)
+cor(ITsatisfaction, realiability)
+```
+
+By calculating the correlation coefficient of IT ease and IT reliability against overall IT satisfaction, it can be seen that strong correlations exist, with both ease and reliability directly affecting the overall satisfaction.
+
+However it can be seen that there is more of a correlation between ease and overall IT quality than reliability and IT quality - we can thus conclude from this data that if the IT service is easier to use, then students will be more satisfied on the whole with the university's IT quality. This is mirrored in IT reliability, however due to the difference in correlation, it can be said that IT ease plays a larger role than the former.
+
+###**Faculty Specific Analysis**
+
+```{r}
+library(ggplot2)
+p=ggplot(sydneyuni, aes(x=UnitFaculty))
+p+geom_bar()+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+During our survey, we collected data from students across all different faculties, with Science and Engineering/IT being the most common ones; thus our conclusions for Science and Engineering/IT faculties should be expected to be more accurate due to the larger sample size, whereas our information obtained from smaller sample sized faculties such as Buisiness and Music would be much less reliable.
+
+```{r}
+library(ggplot2)
+qplot(UnitFaculty,OverallSatisfaction,data = sydneyuni, geom = "boxplot") +
+  coord_flip()
+```
+
+Above is an overview of the faculty-specific overall satisfaction with the university.
+
+```{r}
+sciencesub=subset(sydneyuni, sydneyuni$UnitFaculty == "Science, Agriculture, Environment and Veterinary Science")
+p1 = ggplot(sciencesub, aes(x = OverallSatisfaction)) + ggtitle("Science, Agriculture, Environment and Vetinary Science \n Overall Satisfaction") +
+  labs(x="Overall Satisfaction (1-10)",y="count")  # Defines the x axis (1 variable).
+p1 + geom_histogram() 
+```
+```{r}
+satisfaction1=sciencesub$OverallSatisfaction
+summary(satisfaction1)
+sd(satisfaction1)
+```
+
+As we can see, the Science faculty is one of the more interviewed faculties of those we have collected. From further analysing the data it can be seen that the majority of people in the course seem to be close to the expected median satisfaction, with almost everyone rating their uni general satisfaction over a 5/10. The mean score for overall university satisfaction, through the science faculty is approximately 6.5, which is slightly lower than the overall median of 7. The standard deviation, however, is 1.79, so there is a fairly large spread.
+
+```{r}
+musicsub=subset(sydneyuni, sydneyuni$UnitFaculty == "Music")
+p1 = ggplot(musicsub, aes(x = OverallSatisfaction)) + ggtitle("Music \n Overall Satisfaction") +
+  labs(x="Overall Satisfaction (1-10)",y="count")  # Defines the x axis (1 variable).
+p1 + geom_histogram() 
+```
+
+There was only one survey participant that indentified as part of the music faculty, so this is not a good represenation of the faculty's overall satisfaction. The music faculty ranked the lowest in overall satisfaction, but this result is factually unreliable due to the small sample size. 
+
+```{r}
+lawsub=subset(sydneyuni, sydneyuni$UnitFaculty == "Law")
+p1 = ggplot(lawsub, aes(x = OverallSatisfaction)) + ggtitle("Law \n Overall Satisfaction") +
+  labs(x="Overall Satisfaction (1-10)",y="count")  # Defines the x axis (1 variable).
+p1 + geom_histogram() + scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
+```
+
+As we can see, the law faculty is also affected by the lack of a large sample size, with one student giving a 7/10 for overall satisfaction and the other giving an 8, so the mean satisfaction is 7.5 which is slightly above the overall satisfaction, however this conclusion also can not be taken as accurate.
+
+```{r}
+satisfaction2=lawsub$OverallSatisfaction
+summary(satisfaction2)
+sd(satisfaction2)
+```
+```{r}
+enginsub=subset(sydneyuni, sydneyuni$UnitFaculty == "Engineering and Information Technologies")
+p1 = ggplot(enginsub, aes(x = OverallSatisfaction)) + ggtitle("Enginerring and IT \n Overall Satisfaction") +
+  labs(x="Overall Satisfaction (1-10)",y="count")  # Defines the x axis (1 variable).
+ii <- 1:10
+p1 + geom_histogram() +scale_x_continuous(breaks=ii) 
+
+```
+```{r}
+satisfaction3=enginsub$OverallSatisfaction
+summary(satisfaction3)
+sd(satisfaction3)
+
+```
+
+The engineering and IT students were another one of the more interviewed faculties of those surveyed. From further analysing the data, it can be seen that 100% of the faculty gave a rating above 3, around one third gave a of 5 or less, and about two thirds of the students rated thier overall satisfaction as a 7 or higher. This shows that the faculty is split in terms of overall satisfaction, with a standard deviation of 1.78 from its mean of 6.625 - the mean being lower than the gereral mean of 7 across all faculties. This information tells us that while the majority of students in the faculty are satisfied in their degree, they are slightly less satisfied overall than the other faculties. 
+
+```{r}
+edsub=subset(sydneyuni, sydneyuni$UnitFaculty == "Education and Social Work")
+p1 = ggplot(edsub, aes(x = OverallSatisfaction)) + ggtitle("Education and social work \n Overall Satisfaction") +
+  labs(x="Overall Satisfaction (1-10)",y="count")  # Defines the x axis (1 variable).
+ii <- 1:10
+p1 + geom_histogram() +scale_x_continuous(breaks=ii) 
+
+```
+```{r}
+satisfaction4=edsub$OverallSatisfaction
+summary(satisfaction4)
+sd(satisfaction4)
+
+```
+
+The Education and Social Work faculty also has a very small sample size, so it is not as reliable as some of the other faculties, however the limited data available shows its students to be more unsatisfied than those of other faculties, with 100% of students giving a rating of 7 or less, and with a mean overall satisfaction of 6 which is lower than the expected 7.
+
+```{r}
+bussub=subset(sydneyuni, sydneyuni$UnitFaculty == "Business")
+p1 = ggplot(bussub, aes(x = OverallSatisfaction)) + ggtitle("Business \n Overall Satisfaction") +
+  labs(x="Overall Satisfaction (1-10)",y="count")  # Defines the x axis (1 variable).
+ii <- 1:10
+p1 + geom_histogram() +scale_x_continuous(breaks=ii) 
+
+```
+
+The Business faculty only had one survey participant, so it can not be taken as an accurate representation of the entire business faculty. Regardless, it had a mean overall satisfaction rating of 8, being higher than the expected 7. 
+
+```{r}
+artssub=subset(sydneyuni, sydneyuni$UnitFaculty == "Arts and Social Sciences")
+p1 = ggplot(artssub, aes(x = OverallSatisfaction)) + ggtitle("Arts and Social Sciences \n Overall Satisfaction") +
+  labs(x="Overall Satisfaction (1-10)",y="count")  # Defines the x axis (1 variable).
+ii <- 1:10
+p1 + geom_histogram() +scale_x_continuous(breaks=ii) 
+
+```
+
+Once more, the Arts and Social Sciences faculty was not heavily represented in the collected data set. However from the data we can see that it had a higher mean than the expected, being a 7.5. 
+
+```{r}
+Archsub=subset(sydneyuni, sydneyuni$UnitFaculty == "Architecture, Design and Planning")
+p1 = ggplot(Archsub, aes(x = OverallSatisfaction)) + ggtitle("Architecture Design and Planning \n Overall Satisfaction") +
+  labs(x="Overall Satisfaction (1-10)",y="count")  # Defines the x axis (1 variable).
+ii <- 1:10
+p1 + geom_histogram() +scale_x_continuous(breaks=ii) 
+
+```
+```{r}
+satisfaction5=Archsub$OverallSatisfaction
+summary(satisfaction5)
+sd(satisfaction5)
+```
+
+The Architecture, Design and Planning faculty had the largest varience in overall satisfaction within the university. Its 5.25 mean satisfaction rating was much lower than the expected 7. It also had the largest standard deviation (2.5) which can be seen through the large range in overall satisfaction (lowest 2 and highest 8).
+
+###Faculties with the highest/lowest overall satisfactions 
+
+(* = few data points collected, not overly representative of faculty)
+(** = very little data points collected, not representative of faculty)
+In order of least to most overall satisfaction (taking into consideration mean, range and standard deviation):
+
+- Music**
+- Architecture*
+- Education*
+- Science 
+- Engineering 
+- Arts*
+- Law*
+- Business**
+
+```{r}
+library(ggplot2)
+data(sydneyuni)
+qplot(UnitFaculty,OverallSatisfaction,data = sydneyuni, geom = "boxplot") +
+  coord_flip()
+qplot(UnitFaculty,ITQuality,data = sydneyuni, geom = "boxplot") +
+  coord_flip()
+
+```
+
+From the boxplots decribing the perceived IT quality and overall satisfaction with respect to faculty, we can observe the relationship between each faculty's overall satisfaction and their perception of IT quality.
+
+Ranking each Faculty in terms of thier satisfaction with thier IT services from lowest to highest (based on mean, range and standard deviation):
+
+- Music 
+- Architectue
+- Education and Social work
+- Engineering
+- Science 
+- Law
+- Arts
+- Business
+
+Comparing this to the order of overall satisfaction by faculty:
+
+- Music
+- Architecture
+- Education and Social Work
+- Science 
+- Engineering 
+- Arts
+- Law
+- Business
+
+By comparing two lists, we find that their orders are extremely similar, leading to the insightful conclusion that perceived quality of IT services does play a large role in the overall satisfaction with the university.
+
+```{r}
+cor(lawsub$OverallSatisfaction, lawsub$ITQuality)
+```
+
+The correlation between the law faculty's perceived IT quality and overall satisfaction directly correlates with a perfect score of 1.
+
+```{r}
+cor(sciencesub$OverallSatisfaction, sciencesub$ITQuality)
+```
+
+The science faculty's correlation between overall university satisfaction and perceived IT quality is loosely correlated at 0.3, meaning that for science, the quality of IT services did not have as big an impact upon overall satisfaction with the university.
+
+```{r}
+cor(musicsub$OverallSatisfaction, musicsub$ITQuality)
+```
+
+The correlation between the music faculty's perceived IT quality and overall satisfaction directly correlates with a perfect score of 1.
+
+```{r}
+cor(enginsub$OverallSatisfaction, enginsub$ITQuality)
+```
+
+There is a relatively high correlation between perceived IT quality and overall satisfaction with the university in the engineering/IT faculty. Worth noting is that this data is also very realiable, as it has the largest sample size of all the faculties. 
+
+```{r}
+cor(edsub$OverallSatisfaction, edsub$ITQuality)
+```
+
+The education and social work faculty has a low correlation between perceived IT quality and  overall university satisfaction.
+
+```{r}
+cor(bussub$ITQuality,bussub$OverallSatisfaction)
+```
+
+The correlation between the business faculty's perceived IT quality and overall satisfaction directly correlates with a perfect score of 1.
+
+```{r}
+cor(artssub$ITQuality, artssub$OverallSatisfaction)
+```
+
+The arts faculty had no correlation between perceived quality of IT services and overall satisfaction with the university.
+
+```{r}
+cor(Archsub$OverallSatisfaction, Archsub$ITQuality)
+```
+
+(**= verylittle data and very unrealiable)
+(*= little data and unrealiable)
+Faculties in which perceived quality of IT services impacted the overall university satisfaction from lowest to highest were:
+- Arts*
+- Science
+- Education*
+- Architecture*
+- Engineering 
+- Law*
+- Business**
+- Music**
+
+```{r}
+OverallSatisfaction=sydneyuni$OverallSatisfaction
+workingspacesatisfaction = sydneyuni$TeachSpaceQuality
+plot(workingspacesatisfaction, OverallSatisfaction, xlab = "faculty facilities satisfaction", ylab = "Overall Satisfaction",main="Correlation Between uni faculty's facilities satisfaction and Overall Satisfaction")
+points(mean(workingspacesatisfaction), mean(OverallSatisfaction), col = "indianred", pch = 19, cex = 2)  
+legend("topleft", c("point of averages (centre)"), col = "indianred", pch = 19)
+cor(workingspacesatisfaction,OverallSatisfaction)
+abline(4.8193403, 0.2401299 )
+```
+
+There is very little correlation between perceived quality of faculty facilities and overalll satisfaction with the university - the correlation is very weak with a correlation coefficient of 0.25.
+
+```{r}
+library(ggplot2)
+data(sydneyuni)
+qplot(UnitFaculty,TeachSpaceQuality,data = sydneyuni, geom = "boxplot") +
+  coord_flip()
+```
+Ranking in order of lowest to highest in terms of faculty-specific perceptions of facility quality (when considering mean, range and spread):
+
+- Music
+- Education
+- Engineering
+- Arts
+- Architecture
+- Science
+- Law
+- Business
+
+```{r}
+OverallSatisfaction=sydneyuni$OverallSatisfaction
+equipmentsatisfaction = sydneyuni$EquipmentQuality
+
+cor(equipmentsatisfaction,OverallSatisfaction)
+
+```
+
+The correlation between perceived equipment satisfaction and overall university satisfaction is also very loosely correlated, with a correlation coefficient of 0.36, showing that there is a slight correlation between equipment quality and overall satisfaction with the university.
+
+```{r}
+library(ggplot2)
+data(sydneyuni)
+qplot(UnitFaculty, EquipmentQuality,data = sydneyuni, geom = "boxplot") +
+  coord_flip()
+```
+Ranking in order of lowest to highest in terms of faculty-specific perceptions of university equipment and hardware quality (when considering mean, range and spread):
+
+- Music
+- Architecture
+- Science
+- Engineering
+- Education
+- Arts
+- Law
+- Business
+
+```{r}
+libraryusers=subset(sydneyuni, sydneyuni$LearningCentre == "Yes")
+library(ggplot2)
+p2 = ggplot(libraryusers, aes(x = StudyAreaSatisfaction, y = OverallSatisfaction)) 
+p2 + geom_point(aes(color = Gender, shape = DomesticInternational))
+```
+
+```{r}
+cor(libraryusers$StudyAreaSatisfaction, libraryusers$OverallSatisfaction)
+```
+
+There is next to no correlation between  overall satisfaction with the university and  satisfaction with learing aresa such as libraries and study areas. Due to the small correlation coefficient, it can be concluded that the quality of the learning centre does not have an effect on  overall university satisfaction. 
+
+###*Conclusions*
+
+*Overall*
+
+The median satisfaction across all faculties was a 7/10.
+
+When observing the relationship between satisfaction of various university facilities and overall university satifaction, it was found that the factors causing the greatest impact on overall satisfaction were:
+
+-IT overall services satisfaction (0.54 correlation with overall university satisfaction)
+  - In addition, IT ease was found to be more impactful than IT reliability upon the overall satisfaction with IT services
+  
+- Faculty facilities (e.g. lecture theatres, tutorial rooms, labs etc) (0.25 correlation with overall university satisfaction)
+
+- Faculty Equipment (e.g. Hardware & computers) (0.36 correlation with overall university satisfaction)
+
+- University learning centres (-0.004 correlation with overall university satisfaction)
+
+
+*By Faculty*
+
+When comparing faculties, it can be seen that some faculties were less satisfied with the uni than others. Faculties also have differing views on thier respective IT services, equipment, and learning spaces.
+
+(* = few data points collected, not overly representative of faculty)
+(** = very little data points collected, not representative of faculty)
+Faculties in order of overall university satisfaction (least to most satisfied):
+
+- Music** (overall satisfaction median 1, SD=0)
+   
+    -Teaching Spaces Median (1/10)
+    -IT satisfaction median (1/10)
+    -Equipment quality median(1/10)
+
+- Architecture* (overall satisfaction median 5.25, 2.5 SD)
+    
+    -IT quality median(6/10)
+    -Teaching space quality median(7.5)
+    -Equipment Quality median(6.5)
+
+- Education* (overall satisfaction median 6, 1.5 SD)
+   
+    -IT quality median(6/10)
+    -Teaching space quality median(5/10)
+    -Equipment Quality median(7.5)
+    
+- Science (overall satisfaction median 7, 1.79 SD)
+    
+    -IT quality median(7/10)
+    -Teaching space quality median(8/10)
+    -Equipment Quality median(7/10)
+
+- Engineering (overall satisfaction median 6.6, 1.79 SD)
+   
+    -IT quality median(7/10)
+    -Teaching space quality median(7/10)
+    -Equipment Quality median(7.5/10)
+
+- Arts* (overall satisfaction median 7.5, 0.7 SD)
+   
+    -IT quality median(7.5/10)
+    -Teaching space quality median(7.5/10)
+    -Equipment Quality median(8/10)
+
+- Law* (overall satisfaction median 7.5, sd=0.7)
+   
+    -IT quality median(7/10)
+    -Teaching space quality median(8/10)
+    -Equipment Quality median(8/10)
+    
+- Business** (overall satisfaction median 8, 0 SD)
+    
+    -IT quality median(8/10)
+    -Teaching space quality median(9/10)
+    -Equipment Quality median(9/10)
+    
+##Research Question 2: How satisfied are University of Sydney students with the quality of course/course content at the University?
+
+```{r variable setup, echo=FALSE, warning=FALSE}
+library(readr)
+library(ggplot2)
+data=read.csv("/Users/alanburzevski/Desktop/DATA1001files/DATA1001/data/FLEXBOIZ2.csv")
+
+usefulness=data$CourseSyllabusUsefulness
+employability=data$UnitEmployability
+material=data$LearningMaterialSatisfaction
+unitfaculty=data$UnitFaculty
+structure=data$UnitStructureSatisfaction
+external=data$ExternalSourceFrequency
+
+usefulness = as.character(as.numeric(usefulness))
+employability = as.character(as.numeric(employability))
+material = as.character(as.numeric(material))
+structure = as.character(as.numeric(structure))
+usefulness=factor(usefulness, levels=c(1:10))
+employability=factor(employability, levels=c(1:10))
+material=factor(material, levels=c(1:10))
+structure=factor(structure, levels=c(1:10))
+external=factor(external, levels=c("Never", "Sometimes", "Often", "Very frequently"))
+science=subset(data, data$UnitFaculty=="Science, Agriculture, Environment and Veterinary Science")
+engineeringIT=subset(data, data$UnitFaculty=="Engineering and Information Technologies")
+
+pemployability = ggplot(data, aes(x=employability)) + geom_bar(aes(fill=unitfaculty), position = "dodge") + scale_fill_hue(name="Unit Faculty") + xlab("Rating") + ylab("Count") + ggtitle("Perception of Unit Employability")
+pusefulness = ggplot(data, aes(x=usefulness)) + geom_bar(aes(fill=unitfaculty), position = "dodge") + scale_fill_hue(name="Unit Faculty") + xlab("Rating") + ylab("Count") + ggtitle("Perception of Unit Usefulness")
+pmaterial = ggplot(data, aes(x=material)) + geom_bar(aes(fill=unitfaculty), position = "dodge") + scale_fill_hue(name="Unit Faculty") + xlab("Satisfaction Rating") + ylab("Count") + ggtitle("Satisfaction with Course Material")
+pstructure = ggplot(data, aes(x=structure)) + geom_bar(aes(fill=unitfaculty), position = "dodge") + scale_fill_hue(name="Unit Faculty") + xlab("Satisfaction Rating") + ylab("Count") + ggtitle("Satisfaction with Course Structure")
+pexternal = ggplot(data, aes(x=external)) + geom_bar(aes(fill=unitfaculty), position = "dodge") + xlab("Frequency") + ylab("Count") + ggtitle("Frequency of External Source Use")
+
+pemployabilityS = ggplot(science, aes(x=science$UnitEmployability)) + geom_bar() + scale_x_discrete(limits=c(1:10)) + xlab("Rating") + ylab("Count") + ggtitle("Science Employability")
+pemployabilityE = ggplot(engineeringIT, aes(x=engineeringIT$UnitEmployability)) + geom_bar() + scale_x_discrete(limits=c(1:10)) + xlab("Rating") + ylab("Count") + ggtitle("Engineering and IT Employability")
+pusefulnessS = ggplot(science, aes(x=science$CourseSyllabusUsefulness)) + geom_bar() + scale_x_discrete(limits=c(1:10)) + xlab("Rating") + ylab("Count") + ggtitle("Science Usefulness")
+pusefulnessE = ggplot(engineeringIT, aes(x=engineeringIT$CourseSyllabusUsefulness)) + geom_bar() + scale_x_discrete(limits=c(1:10)) + xlab("Rating") + ylab("Count") + ggtitle("Engineering and IT Usefulness")
+pmaterialS = ggplot(science, aes(x=science$LearningMaterialSatisfaction)) + geom_bar() + scale_x_discrete(limits=c(1:10)) + xlab("Satisfaction Rating") + ylab("Count") + ggtitle("Science Material Satisfaction")
+pmaterialE = ggplot(engineeringIT, aes(x=engineeringIT$LearningMaterialSatisfaction)) + geom_bar() + scale_x_discrete(limits=c(1:10)) + xlab("Satisfaction Rating") + ylab("Count") + ggtitle("Engineering and IT Material Satisfaction")
+pstructureS = ggplot(science, aes(x=science$UnitStructureSatisfaction)) + geom_bar() + scale_x_discrete(limits=c(1:10)) + xlab("Satisfaction Rating") + ylab("Count") + ggtitle("Science Structure")
+pstructureE = ggplot(engineeringIT, aes(x=engineeringIT$UnitStructureSatisfaction)) + geom_bar() + scale_x_discrete(limits=c(1:10)) + xlab("Satisfaction Rating") + ylab("Count") + ggtitle("Engineering and IT Structure")
+pexternalS = ggplot(science, aes(x=science$ExternalSourceFrequency)) + geom_bar() + xlab("Frequency") + ylab("Count") + ggtitle("Science External Sources")
+pexternalE = ggplot(engineeringIT, aes(x=engineeringIT$ExternalSourceFrequency)) + geom_bar() + xlab("Frequency") + ylab("Count") + ggtitle("Engineering and IT External Sources")
+```
+
+```{r multiplot function, echo=TRUE, warning=FALSE}
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+  plots <- c(list(...), plotlist)
+  numPlots = length(plots)
+  if (is.null(layout)) {
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+ if (numPlots==1) {
+    print(plots[[1]])
+  } else {
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    for (i in 1:numPlots) {
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+```
+
+NB: The data points collected for this section were all in relation to one specific unit of study that the survey-taker was currently enrolled in, as opposed to their degree as a whole. This was done to mitigate the confounding factor that would occur if the questions were asked in the context of the entire degree â?? giving an estimate of the teaching ability of all lecturers and tutors across all faculties would lead to the loss of data of how specific faculties are performing;
+For the information gathered regarding course satisfaction, data has been collected about multiple faculty units. Of these units, Science and Engineering/IT had the most data, and so they were looked at and compared in detail as the data gathered about them would best reflect the respective populatiosn they were sampled from (largest sample size).
+
+###**Hypothesis**
+There will be a mixed result of students who are satisfied and who are not satisfied.
+
+###**Defining Variables**
+
+- Course Usefulness - How useful the information taught in the course is to the real world.
+- Employability - How useful the information taught in the course is to the job market in the real world i.e. how employable will one be after completing the course.
+- Learning Material Satisfaction - How satisfied students are with the material provided to them for learning purposes.
+- Unit Faculty - Which faculty the unit in question (that survey-takers answered questions in respect to) belongs to.
+- Unit Structure Satisfaction - How satisfied students are with the overral structure of their unit (this may refer to the order in which content is taught, the learning outcomes etc.)
+- External Source Frequency - How frequently students use external sources (sources other than those provided by the university) to help with their learning.
+
+###**Classifying Variables**
+
+- Course Usefulness - Qualitative Ordinal
+- Employability - Qualitative Ordinal
+- Learning Material Satisfaction - Qualitative Ordinal
+- Unit Faculty - Qualitative Nominal
+- Unit Structure Satisfaction - Qualitative Ordinal
+- External Source Frequency - Qualitative Ordinal
+
+###**Any alterations to data (removing outliers etc.)**
+No alterations to data.
+
+###**Trends**
+
+```{r, usefulness, echo=FALSE, warning=FALSE}
+pusefulness
+```
+
+It appears that most students do perceive their unit to be moderately useful, with the exception of Architecture, Design and Planning students, and the single music student surveyed.
+
+```{r,usefulness num sum, warning=FALSE}
+mean(data$CourseSyllabusUsefulness)
+median(data$CourseSyllabusUsefulness)
+```
+
+```{r, usefulness subject, echo=FALSE, warning=FALSE}
+multiplot(pusefulnessS, pusefulnessE, cols=2)
+```
+
+When focusing in on Science and Engineering/IT, it can be observed qualitatively that Engineering/IT students tended to find their course more useful than their science counterparts, and further numerical summaries can be done to demonstrate this.
+
+```{r, usefulness science/eng num sum}
+mean(science$CourseSyllabusUsefulness)
+mean(engineeringIT$CourseSyllabusUsefulness)
+median(science$CourseSyllabusUsefulness)
+median(engineeringIT$CourseSyllabusUsefulness)
+```
+
+```{r, employability, echo=FALSE, warning=FALSE}
+pemployability
+```
+
+Most students also found their unit to be employable in the future, with the exception of Architecture, Design and Planning students, of whom 100% rated their unit's employability as a 1 (very unemployable), and the single music student who also gave their unit's employability a score of 1.
+
+```{r, employability num sum, warning=FALSE}
+mean(data$UnitEmployability)
+median(data$UnitEmployability)
+```
+
+```{r, employability subject, echo=FALSE, warning=FALSE}
+multiplot(pemployabilityS, pemployabilityE, cols=2)
+```
+
+When focusing in on Science and Engineering/IT, it can be observed that Science students had a larger spread of results than Engineering/IT students who were very tightly focused around the 7 mark. Again, it appears that Engineering/IT students perceived their unit to be more employable than their Science counterparts
+
+```{r, employability science/eng num sum}
+mean(science$UnitEmployability)
+mean(engineeringIT$UnitEmployability)
+median(science$UnitEmployability)
+median(engineeringIT$UnitEmployability)
+```
+
+```{r, material satisfaction, echo=FALSE, warning=FALSE}
+pmaterial
+```
+
+From the graph, it appears that students seem to be quite satisfied with the quality of their course material - more so than their course usefulness or employability. Again, however, Architecture, Design and Planning students tend to be quite unsatisfied with the quality of their course material with a mean satisfaction of 4, as was the single music student who gave a score of 1 for course material satisfaction.
+
+```{r, material satisfaction num sum, warning=FALSE}
+mean(data$LearningMaterialSatisfaction)
+median(data$LearningMaterialSatisfaction)
+```
+
+```{r, material satisfaction subject, echo=FALSE, warning=FALSE}
+multiplot(pmaterialS, pmaterialE, cols=2)
+```
+
+As with course employability, when focusing in on Science and Engineering/IT it can be observed that Science students had a larger spread than Engineering/IT students in terms of course material satisfaction, who again seemed to cluster quite tightly around the satisfaction score of 7. Engineering/IT students tended to be more satisfied with their course material than science students.
+
+```{r, material satisfaction science/eng num sum}
+mean(science$UnitEmployability)
+mean(engineeringIT$UnitEmployability)
+median(science$UnitEmployability)
+median(engineeringIT$UnitEmployability)
+```
+
+```{r, structure, echo=FALSE, warning=FALSE}
+pstructure
+```
+
+From the graph, it appears that students appear to be quite satisfied with their course structure, however there are more than a few students who are also unsatisfied with their course structure. Architecture, Design and Planning students, again, seem to be quite unsatisfied with their course structure, as was the lone music student who again gave a score of 1 to their course structure.
+
+```{r, structure num sum, warning=FALSE}
+mean(data$UnitStructureSatisfaction)
+median(data$UnitStructureSatisfaction)
+```
+
+```{r, structure subjects, echo=FALSE, warning=FALSE}
+multiplot(pstructureS, pstructureE, cols=2)
+```
+
+The distribution of Science students' satisfaction with course structure remains quite similar to the other surveyed variables, perhaps only with a slight increase in scores of 2 and 3, however the distribution of Engineering/IT students' satisfaction is quite different to previous observed variables. While the scores are still clustered around7, they are much more loosely clustered, and there were quite a few students who gave the low scores of 1 and 3.
+
+```{r, structure science/eng num sum}
+mean(science$UnitStructureSatisfaction)
+mean(engineeringIT$UnitStructureSatisfaction)
+median(science$UnitStructureSatisfaction)
+median(engineeringIT$UnitStructureSatisfaction)
+```
+
+```{r, external sources, echo=FALSE, warning=FALSE}
+pexternal
+```
+
+When observing the graph of external source frequency, there is a more apparent difference in satisfaction between faculties than the other variables surveyed, with the majority of Engineering/IT students only sometimes using external sources, but quite a substantial portion of Science students using external sources very frequently. Interestingly, nearly none of the subjects surveyed never used external sources, and then the numbers of those that used external sources sometimes, often and very frequently were quite similar.
+
+```{r, external sources subjects, echo=FALSE, warning=FALSE}
+multiplot(pexternalS, pexternalE, cols=2)
+```
+
+Science students tend to use external sources more frequently than Engineering/IT students.
+
+```{r, material satisfaction vs structure, echo=FALSE, warning=FALSE}
+ggplot(data, aes(material,structure)) + geom_point(size = 5, alpha = 0.2, colour="red") + xlab("Learning Material Satisfaction") + ylab("Unit Structure Satisfaction") + ggtitle("Learning Material Satisfaction against Unit Structure Satisfaction")
+```
+
+```{r, material satisfaction vs structure correlation}
+cor(data$LearningMaterialSatisfaction, data$UnitStructureSatisfaction)
+```
+
+When comparing Learning Material Satisfaction and Unit Structure Satisfaction, there appears to be quite a strong correlation. This leads to one of two conclusions - either they are directly related, or more likely that there is a psychological correlation in the student's mind between the two (a course that isn't structured very well will lead a student to believe the learning material is unsatisfactory and vice versa)
+
+```{r, material satisfaction vs usefulness, warning=FALSE}
+ggplot(data, aes(material,usefulness)) + geom_point(size = 5, alpha = 0.2, colour="orange") + xlab("Learning Material Satisfaction") + ylab("Course Usefulness") + ggtitle("Learning Material Satisfaction against Course Usefulness")
+```
+
+```{r, material satisfaction vs usefulness correlation}
+cor(data$LearningMaterialSatisfaction, data$CourseSyllabusUsefulness)
+```
+
+Learning Material Satisfaction is not as strong correlated with Course Usefulness as it is with Course Structure Satisfaction, however the correlation is still quite high. This is likely due to a psychological cause as well, as a student who is not satisfied with the learning material is expected to psychologically perceive the course as less useful than if they were satisfied with the material provided to them. 
+
+```{r, employability vs usefulness, echo=FALSE, warning=FALSE}
+ggplot(data, aes(employability,usefulness)) + geom_point(size = 5, alpha = 0.2, colour="purple") + xlab("Employability") + ylab("Usefulness") + ggtitle("Course Employability against Course Usefulness")
+```
+```{r, employability vs usefulness correlation}
+cor(data$UnitEmployability, data$CourseSyllabusUsefulness)
+```
+
+Perception of course employability also had a strong correlation with perception of course usefulness. This is expected, as the two variables are quite similar. The fact that the correlation isn't higher than 0.736 is likely due to the fact that students may perceive some content to be useful, but simply there is little to no market for it (for example some of the social sciences).
+
+```{r, structure vs employability, material vs employability, echo=FALSE, warning=FALSE}
+ggplot(data, aes(structure, employability)) + geom_point(size = 5, alpha = 0.2, colour="darkgreen") + ylab("Employability") + xlab("Unit Structure Satisfaction") + ggtitle("Structure Satisfaction against Employability")
+ggplot(data, aes(material, employability)) + geom_point(size = 5, alpha = 0.2, colour="darkblue") + ylab("Employability") + xlab("Learning Material Satisfaction") + ggtitle("Learning Material Satisfaction against Employability")
+```
+```{r, employability vs structure, employability vs material correlation}
+cor(data$UnitEmployability, data$UnitStructureSatisfaction)
+cor(data$UnitEmployability, data$LearningMaterialSatisfaction)
+```
+
+Both course structure and learning material satisfaction have a relatively strong correlation with student perceptions of their course's employability. This leads to a very interesting conclusion - a student's perception of their course's employability is largely affected by how satisfied they are with their unit's structure and learning material quality. 
+
+```{r, boxplots, echo=FALSE, warning=FALSE}
+multiplot(
+  ggplot(data, aes(x=external, y=data$UnitEmployability)) + geom_boxplot() + scale_y_continuous(breaks=c(0:10, 1)) + geom_dotplot(binaxis='y', stackdir='center', dotsize=0.5) + xlab("Frequency of External Source Use") + ylab("Perception of Unit Employability") + ggtitle("External Source ~ Employability"),
+
+ggplot(data, aes(x=external, y=data$CourseSyllabusUsefulness)) + geom_boxplot() + scale_y_continuous(breaks=c(0:10, 1)) + geom_dotplot(binaxis='y', stackdir='center', dotsize=0.5) + xlab("Frequency of External Source Use") + ylab("Perception of Unit Usefulness") + ggtitle("External Source ~ Usefulness"),
+
+ggplot(data, aes(x=external, y=data$LearningMaterialSatisfaction)) + geom_boxplot() + scale_y_continuous(breaks=c(0:10, 1)) + geom_dotplot(binaxis='y', stackdir='center', dotsize=0.5) + xlab("Frequency of External Source Use") + ylab("Learning Material Satisfaction") + ggtitle("External Source ~ Learning Material"),
+
+ggplot(data, aes(x=external, y=data$UnitStructureSatisfaction)) + geom_boxplot() + scale_y_continuous(breaks=c(0:10, 1)) + geom_dotplot(binaxis='y', stackdir='center', dotsize=0.5) + xlab("Frequency of External Source Use") + ylab("Unit Structure Satisfaction") + ggtitle("External Source ~ Unit Structure"),
+cols=2)
+```
+From an analysis of survey results, there is a very clear correlation between frequency of external source use and the other four variables included in this section (course employability, learning material, unit usefulness and unit structure). Those students who rely on external sources to supplement their learning tend to perceive their courses as less employable, their learning material as less satisfactory, their course as less useful and their unit structure as less satisfactotry.
+
+###**Conclusion**
+In conclusion, it is clear that the variables tested are heavily dependent on each other, meaning that improving USYD students' satisfaction with their course/course material is not as simple as focusing on improving only one aspect. A wholistic approach must be taken in order to improve students' perception of their course's employability, learning material, unit usefulness, unit structure and external source use in order to boost students' overall satisfaction. 
+
+The data collected points to an overall satisfaction of around 6-7/10 - an acceptable result, but one which could and indeed should attempt to be improved. As stated previously, there was no outstanding section that needed more focus than any other, so equal effort should be put into improving all said variables regarding course/course material in order to increase student satisfaction with their quality of education.
+
+##Research Question 3: How do University of Sydney students perceive the Quality of Teaching at the University?
+
+NB: The data points collected for this section were all in relation to one specific unit of study that the survey-taker was currently enrolled in, as opposed to their degree as a whole. This was done to mitigate the confounding factor that would occur if the questions were asked in the context of the entire degree â?? giving an estimate of the teaching ability of all lecturers and tutors across all faculties would lead to the loss of data of how specific faculties are performing.
+
+###**Hypothesis**
+There will be mixed levels of satisfaction for each metric, but this will stay somewhat consistent across all three metrics when looking at specific faculties.
+
+###**Defining Variables**
+
+- Teaching Ability - Defined in the survey as the general teaching ability of both lecturers and tutors specific to a unit of study, ranked on a scale of 1-10 (qualitative ordinal variable, since only integer responses were allowed), 10 being the best score.
+- Lecture Usefulness - Defined in the survey as the necessity of attending/watching lectures to the participant achieving their academic goals (as opposed to consuming lecture material without lecturer input), ranked on a scale of 1-10. A rank of 1 means that the participant is able to learn from provided course material on their own and achieve the same grade without lecturer input, while a rank of 10 means that additional value that the lecturer provides is essential to the participantâ??s learning process.
+- Tutorial Usefulness - Defined in the survey as the necessity of attending tutorials to the participant achieving their academic goals (as opposed to consuming tutorial material without tutor input), ranked on a scale of 1-10. A rank of 1 means that the participant is able to complete tutorial sheets on their own with no input from the tutor and achieve the same grade, while a rank of 10 means that input and feedback from the tutor is essential to their learning process
+- Unit Faculty - This refers to the faculty to which the assessed unit of study belongs to.
+
+###**Classifying Variables**
+
+- Teaching Ability - Qualitative Ordinal
+- Lecture Usefulness - Qualitative Ordinal
+- Tutorial Usefulness - Qualitative Ordinal
+- Unit Faculty - Qualitative Nominal
+
+###**Any alterations to data (removing outliers etc.)**
+No alterations to data.
+
+###**Trends**
+Below are bar charts representing the count of each given numerical rank for each metric, divided by faculty of the assessed unit of study, followed by their corresponding mean and standard deviation.
+
+Upon visual inspection, all of the graphs below are negatively skewed. This is a positive sign â?? this means that the readings are generally more concentrated on the higher end of the 1-10 ranking scale, which then corresponds to a relatively high general satisfaction rate.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(ggplot2)
+
+
+
+data = read.csv("/Users/alanburzevski/Desktop/DATA1001files/DATA1001/data/FLEXBOIZ2.csv")
+
+ggplot(data, aes(x=data$TeachingAbility)) + geom_bar(aes(fill=data$UnitFaculty)) + scale_x_discrete(limits=c(1:10)) + ggtitle("Teaching Ability Ratings") + labs(x = "Rating") + labs(y = "Count") + scale_fill_hue(name="Unit Faculty")
+
+```
+```{r}
+mean(data$TeachingAbility)
+sd(data$TeachingAbility)
+```
+
+In terms of the graph of general Teaching Ability, one interesting observation is its spread â?? while it does not have the highest mean among the three metrics, it does have the lowest standard deviation. 
+
+This means that there is a stronger concentration of data points around the (relatively high) mean of 6.62 compared to the other two graphs, which implies that a high proportion students are generally satisfied with the teaching ability of their lecturers and tutors.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+ggplot(data, aes(x=data$LectureUsefulness)) + geom_bar(aes(fill=data$UnitFaculty)) + scale_x_discrete(limits=c(1:10)) + ggtitle("Lecture Usefulness Ratings") + labs(x = "Rating") + labs(y = "Count") + scale_fill_hue(name="Unit Faculty")
+
+```
+```{r}
+mean(data$LectureUsefulness)
+sd(data$LectureUsefulness)
+```
+
+In terms of the graph of Lecture Usefulness, it is interesting to note the shape of the graph. It seems to indicate a multimodal distribution, with the peaks occurring at x=8, x=5, x=3 and x=1, with valleys inbetween them. This implies that there is a distinct split between students who are highly satisfied with the usefulness of their lectures, and those who are only moderately satisfied to not satisfied.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+ggplot(data, aes(x=data$TutorialUsefulness)) + geom_bar(aes(fill=data$UnitFaculty)) + scale_x_discrete(limits=c(1:10)) + ggtitle("Tutorial Usefulness Ratings") + labs(x = "Rating") + labs(y = "Count") + scale_fill_hue(name="Unit Faculty")
+
+```
+```{r}
+mean(data$TutorialUsefulness)
+sd(data$TutorialUsefulness)
+```
+In terms of the graph of Tutorial Usefulness, while visual inspection would show that the modal rank is 8, in reality, the median rank is still only 7. In addition to this, the standard deviation is 2.41, which is slightly higher than the standard deviation of general Teaching Ability. 
+
+The modal rank of 8 is still a positive sign of good student satisfaction, however it is important to note that the higher standard deviation means that this sentiment is not as strongly shared across the board.
+
+While the above findings are useful as an indicator of general lecturer and tutor performance across all faculties, it would be even more useful to have an in-depth look at the performance of each faculty. However, due to the small sample size, and the fact that 81.2% of our data points come from students in the Science, Agriculture, Environment and Veterinary Science (referred to as subset1 in the numerical summaries below), and Engineering and Information Technologies (subset2) fields, it is only really meaningful to have an in-depth look at those fields within the context of this study.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+subset1=subset(data, data$UnitFaculty == "Science, Agriculture, Environment and Veterinary Science")
+
+subset2=subset(data, data$UnitFaculty == "Engineering and Information Technologies")
+
+ggplot(subset1, aes(x=subset1$TeachingAbility)) + geom_bar(aes(fill=subset1$UnitFaculty)) + scale_x_discrete(limits=c(1:10)) + labs(x = "Rating") + labs(y = "Count") + ggtitle("Teaching Ability")+scale_fill_manual(name="Unit Faculty", values = c("#619CFF"))
+
+ggplot(subset2, aes(x=subset2$TeachingAbility)) + geom_bar(aes(fill=subset2$UnitFaculty)) + scale_x_discrete(limits=c(1:10)) + labs(x = "Rating") + labs(y = "Count")+ ggtitle("Teaching Ability")+scale_fill_hue(name="Unit Faculty")
+
+```
+```{r}
+mean(subset1$TeachingAbility)
+sd(subset1$TeachingAbility)
+mean(subset2$TeachingAbility)
+sd(subset2$TeachingAbility)
+```
+
+Through visual inspection, we can see that both faculties have their peak occur at x=7. However, it is important to note that for the Science faculty, it's mean rating is 6.95, which is higher than the global mean of 6.62 - this is a positive indicator of the performance of the teaching ability of lecturers and tutors in that faculty. In contrast, the mean rating for the Engineering faculty is 6.125 - lower than the global mean. Both faculties have standard deviations which are lower than the global standard deviation of 1.876, which is a positive indicator of the consistency of the performance of the lecturers and tutors in those faculties.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+subset1=subset(data, data$UnitFaculty == "Science, Agriculture, Environment and Veterinary Science")
+
+subset2=subset(data, data$UnitFaculty == "Engineering and Information Technologies")
+
+ggplot(subset1, aes(x=subset1$LectureUsefulness)) + geom_bar(aes(fill=subset1$UnitFaculty)) + scale_x_discrete(limits=c(1:10)) + labs(x = "Rating") + labs(y = "Count") + ggtitle("Lecture Usefulness")+scale_fill_manual(name="Unit Faculty", values = c("#619CFF"))
+
+ggplot(subset2, aes(x=subset2$LectureUsefulness)) + geom_bar(aes(fill=subset2$UnitFaculty)) + scale_x_discrete(limits=c(1:10)) + labs(x = "Rating") + labs(y = "Count")+ ggtitle("Lecture Usefulness")+scale_fill_hue(name="Unit Faculty")
+
+```
+```{r}
+mean(subset1$LectureUsefulness)
+sd(subset1$LectureUsefulness)
+mean(subset2$LectureUsefulness)
+sd(subset2$LectureUsefulness)
+```
+
+The graphs for Lecture Usefulness yield interesting results. Similar to the graph for global ratings, both graphs here are multimodal. However, the graph for the Science faculty is bimobdal with peaks at x=8 and x=3, while the graph for the Engineering faculty is quadmodal with peaks at x=10, x=8, x=5 and x=1. 
+
+This implies that there is a distinct divide between students who feel that attending lectures is essential to their learning process, and students who don't. The existence of the latter implies that there is a possibility that some units of study may have lectures which may not be adding value to the students' education.
+
+However, the decision of whether syllabus reform or lecturer review is necessary should be at the unit-level, and while these results are an indicator that reform might be necessary from a broad perspective, it may very well be true that these are the result of outliers in specific units. Thus, these results are only indicative, and are not comprehensive enough to poinpoint exactly which units of study have lecture structures or content that require review.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+subset1=subset(data, data$UnitFaculty == "Science, Agriculture, Environment and Veterinary Science")
+
+subset2=subset(data, data$UnitFaculty == "Engineering and Information Technologies")
+
+ggplot(subset1, aes(x=subset1$TeachingAbility)) + geom_bar(aes(fill=subset1$UnitFaculty)) + scale_x_discrete(limits=c(1:10)) + labs(x = "Rating") + labs(y = "Count") + ggtitle("Tutorial Usefulness")+scale_fill_manual(name="Unit Faculty", values = c("#619CFF"))
+
+ggplot(subset2, aes(x=subset2$TutorialUsefulness)) + geom_bar(aes(fill=subset2$UnitFaculty)) + scale_x_discrete(limits=c(1:10)) + labs(x = "Rating") + labs(y = "Count")+ ggtitle("Tutorial Usefulness")+scale_fill_hue(name="Unit Faculty")
+
+```
+```{r}
+mean(subset1$TutorialUsefulness)
+sd(subset1$TutorialUsefulness)
+mean(subset2$TutorialUsefulness)
+sd(subset2$TutorialUsefulness)
+```
+
+In terms of ratings for Tutorial Usefulness, the Science faculty has a mean of 7.075, which is higher than the global mean of 6.86, with a similar standard deviation of about 2.4. This is a positive indicator of the quality of tutorials in this faculty. 
+
+In contrast, the ratings for the Engineering field has a mean of 6.58 - lower than the global mean. The standard deviation is also lower than the global standard deviation for this metric at 2.26, which implies a tighter clustering around a lower mean, which is a negative indicator for the quality of tutorials in this faculty.
+
+
+###**Conclusion**
+
+Due to the small sample size, this study is not comprehensive enough to be able to pin point exactly which faculties have units of study which may require review.
+
+However, the findings are still useful as an indicative measure, and they imply that a high proportion students across all faculties are generally satisfied with the teaching ability of their lecturers and tutors, and the structure and content of tutorials. In contrast, the multimodal shape of the graph for Lecture Usefulness implies that the structure or content of lectures in some faculties may require review.
+
+
+##Research Question 4: How do University of Sydney students perceive the quality of extracurricular activities offered at the University?
+
+###**Hypothesis**
+Students will appreciate and be satisfied with the extracurricular activities offered to them.
+
+#**Defining Variables**
+
+- Extracurricular essentiality - Whether extracurricular activities are an essential part of a balanced university education.
+- Extracurricular importance - How important it is to get involved in extracurricular activities.
+- Extracurricular involvement - Whether an individual is involved in extracurricular activities or not.
+- Extracurricular activity frequency - How many days per week (disregarding length of time each day) an individual is involved in extracurricular activities (can be numerous)
+- Extracurricular activity opportunity - Whether students receive enough opportunity to participate in extracurricular activities i.e. ample opportunities to participate in extracurricular activities.
+- Extracurricular third party events - How many extracurricular events held by third parties not associated with the university (may still be endorsed by the university) has an individual attended.
+- Talk rating - Rating given as to the usefulness of the extracurricular third party events.
+
+###**Classifying Variables**
+
+- Extracurricular essentiality - Qualitative Nominal
+- Extracurricular importance - Qualitative Ordinal
+- Extracurricular involvement - Qualitative Nominal
+- Extracurricular activity frequency - Qualitative Ordinal
+- Extracurricular activity opportunity - Qualitative Nominal
+- Extracurricular third party events - Qualitative Nominal
+- Talk rating - Qualitative Ordinal
+
+###**Trends**
+
+```{r}
+data = read.csv("/Users/alanburzevski/Desktop/DATA1001files/DATA1001/data/FLEXBOIZ2.csv")
+bluefocus = c("#0033FF", "#252525", "#525252", "#737373", "#969696", "#BDBDBD", "#D9D9D9", "#F0F0F0")
+greenfocus = c("#41AB5D", "#252525", "#525252", "#737373", "#969696", "#BDBDBD", "#D9D9D9", "#F0F0F0")
+```
+
+**In your opinion, do you think that extracurricular activities are an essential part of your education?**
+```{r}
+barplot(table(data$ExtraCurricularEssential), main = "Whether extracurricular activities are an essential part of education")
+```
+
+**How important do you think it is to get involved in extracurricular activities?**
+```{r}
+hist(data$ECImportant, br = seq(0, 10, by = 1), main = "The importance of getting involved in extracurricular activities", col = greenfocus, xlab = "EducationImportanceRating", prob = T)
+summary(data$ECImportant)
+```
+
+**Are you currently involved in any extracurricular activities?**
+```{r}
+barplot(table(data$ECInvolved), main = "If currently involved in any extracurricular activities")
+```
+
+**How many times per week are you involved with this extracurricular activity?**
+```{r}
+barplot(table(data$ECperweek), main = "The frequency of participation in extracurricular activies" )
+```
+
+Most of the students in our sample show great interest in getting involved in extracurricular activities, but the percentage of students who actually participate in extracurricular activities is lower than anticipated. The frequency of participation in extracurricular activies is mostly less than 2 times a week, but there is a flaw in our survey design - many students who are not currently involved in extracurricular activities may have chosen 0 times per week when asked about the frequency of participation in extracurricular activities, and as a result the frequency of 0 times per week would be higher than in actuality.
+
+
+**Do you think that the university provides students ample opportunities to get involved in extracurricular activities?**
+```{r}
+barplot(table(data$Ecopportunity), main = "Ample opportunities for extracurricular activities?")
+```
+
+**Have you attended any third-party industry-focused talks and networking events organised by USYD to connect students with outside organisations?**
+```{r}
+barplot(table(data$TalkAttendance), main = "whether having attended any third-party events")
+```
+
+**How would you rate third-party industry-focused talks and networking events organised by USYD?**
+```{r}
+hist(data$TalkRating, br = seq(0, 10, by = 1), main = "Talkrating", col = bluefocus, xlab = "TalkRating", prob = T)
+summary(data$TalkRating)
+```
+
+
+Most students also think the university of sydney provides ample opportunities for extracurricular activities, but in our sample, only about a quarter of students have ever attended these types of events, which is lower than anticipated. The reason for this may be that the majority of survey takers are in their first year, so there are many students who have not yet thought about their career. The mean rating of extracurricular events is 7 out of 10, so overall most students are satisfied with the events provided by the Univeristy of Sydney
+
+###**Conclusion**
+Most students in the university of Sydney regard extracurricular activities as an essential part of their education, and the University seems to be doing well in their management of extracurriculars, demonstrated by the 7/10 average satisfaction of survey-takers when asked about the quality of the Univerisity's extracurricular activities. However, something that the university can and should do better is to better link students to extracurricular activities they have to offer, so that the students can get the most out of their univeristy education.
+
+
+#*Box Model*
+The box model has 3 parts.
+
+1.	The number of types of tickets in the box
+2.	The number of tickets in the box
+3.	The number of times tickets are drawn
+
+When drawing parallels between the box model and the structure of this study, the corresponding parts are
+
+1.	Each and every studentâ??s true perception of the quality of their education
+2.	The total number of students in the university (population)
+3.	The number of students who participated in our study (sample)
+
+Based on the logic of the box model, the chance of getting a survey participant who feels a certain way about a specific facet of his education, is equal to the total number of students in the population who feels the same way. For example, the chance of a survey participant being an Arts student who is strongly dissatisfied with the structure of his course, is equal to the number of Arts students in the whole university who feel the same way. 
+
+Due to our small sample size, inherent chance error will play a much larger part, and any outliers or extreme data points wonâ??t be offset by the Law of Averages, i.e., that as the sample size approaches the size of the population, any findings will approach the â??truthâ??.
+
+As a result, the findings in this paper are only indicative of the opinions and perceptions of a small sample, but are still useful in terms of its given purpose as preliminary findings.
+
+#*Report Conclusion*
+In conclusion, we have found that
+
+1.	The median satisfaction for student services across all faculties was a 7/10, which is a decent result, with the quality of IT services being the factor with the strongest correlation to overall satisfaction.
+
+2.	USYD studentsâ?? satisfaction with their course/course material is not as simple as focusing on improving only one aspect; a holistic approach must be taken in order to improve studentsâ?? perception of their courseâ??s employability, learning material, unit usefulness, unit structure and external source use in order to boost studentsâ?? overall satisfaction.
+
+3.	A high proportion of students across all faculties are generally satisfied with both the teaching ability of their lecturers and tutors, and the structure and content of tutorials. However, the multimodal nature of the graph for Lecture Usefulness implies that some students are highly satisfied with the structure and content of their lectures, while some are highly dissatisfied. This might be an area that the University Board might want to review. 
+
+4.	Most students in the University regard extracurricular activities as an essential part of their education, and the University seems to be performing well in this regard, as seen by the mean 7/10 satisfaction rating of the Quality of Extra-Curricular Activities. However, a possible area of improvement is the way the University promotes and connects students to the activities they have to offer.

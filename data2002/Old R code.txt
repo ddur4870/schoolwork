@@ -1,0 +1,182 @@
+---
+title: "project3"
+author: "Darby Durack"
+date: "31 May 2018"
+output: ioslides_presentation
+---
+
+```{r,echo=FALSE, message = FALSE, warning=FALSE, include=FALSE}
+library(readr)
+Student_data_advanced <- read_csv("C:/Users/My Account/Desktop/DATA1001/Project 3/Student_data_advanced.csv")
+
+```
+
+##Do older students have a higher number of fails or HD's than younger students 
+```{r, echo=FALSE, message = FALSE, warning=FALSE, include=FALSE}
+youngdata=subset(Student_data_advanced, Student_data_advanced$Age == "18 and under" | Student_data_advanced$Age=="19-21")
+olddata=subset(Student_data_advanced, Student_data_advanced$Age=="22-25" | Student_data_advanced$Age=="Over 25")
+
+```
+
+```{r, echo=FALSE, message = FALSE, warning=FALSE, include=FALSE}
+tail(youngdata)
+head(olddata)
+```
+##Split of Ages:
+```{r}
+ages_split=youngdata$Age
+table(ages_split)
+ages_split_old=olddata$Age
+table(ages_split_old)
+```
+So above we can see the split of age categores for the "older" amd "younger" students.
+
+##Grades of Younger Students
+```{r}
+young_grades=youngdata$`Unit of Study Grade`
+table(young_grades)
+```
+##This visualised
+```{r}
+barplot(table(young_grades))
+```
+we can see that the distribution of grades most students pass with the higher the score, the less students achieve this.
+
+
+##Grades of Older Students
+```{r}
+old_grades=olddata$`Unit of Study Grade`
+table(old_grades)
+```
+
+##Grades Visualised
+
+```{r}
+barplot(table(old_grades))
+```
+
+
+##Grouped Bar Plot
+```{r}
+counts <- table(Student_data_advanced$`Unit of Study Grade`, Student_data_advanced$Age)
+barplot(counts, main="Frequency of Grades by age group",
+  xlab="Age", col=c("darkblue","red","yellow","orangered","limegreen"),
+ 	legend = rownames(counts), beside=TRUE)
+```
+
+##From Data we can see that:
+
+OUT of 57,165 "young" students:
+
+-12.5% Fail
+
+-34.06% Pass
+
+-27.33% Credits
+
+-19.07% Distinction
+
+-7.03% High Distinction 
+
+Out of 7,321 "older" Students:
+
+-22.78% Fail
+
+-38.41% Pass
+
+-22.35% Credit
+
+-12.59% Distinction
+
+-3.89% High Distinction
+
+##Point to consider:
+
+Older students could be failign more simply because they are studying harder things than the younger students:
+
+
+```{r}
+counts <- table(Student_data_advanced$`Unit of Study Level`, Student_data_advanced$Age)
+barplot(counts, main="Frequency of Grades by age group",
+  xlab="Age", col=c("darkblue","red","yellow"),
+ 	legend = rownames(counts), beside=TRUE)
+```
+
+
+##Another look
+```{r}
+counts <- table(Student_data_advanced$Age, Student_data_advanced$`Unit of Study`)
+barplot(counts, main="Frequency of Grades by age group",
+  xlab="Age", col=c("darkblue","red","yellow","limegreen"),
+ 	legend = rownames(counts), beside=TRUE)
+```
+
+##So do older students take harder units?
+
+From the grpahs above in can be seen that although it could be assumed that the older students are taking harder units, it appears to be that for each age group the % of students taking an advanced, fundamental and mainstream unit are relatively similar across all the age groups. 
+
+The reality is that the "younger" students seem to as a whole take harder units than the "older students ". 
+
+This is shown when looking at the numerical data, 
+
+##tables
+```{r}
+typeofgrade=olddata$`Unit of Study Level`
+typeofgrade2=youngdata$`Unit of Study Level`
+table(typeofgrade)
+table(typeofgrade2)
+```
+
+##Pie chart(visualisation)
+```{r}
+par(mfrow=c(1,2) ) # 1 row and 3 columns for plots
+pie( table(typeofgrade), col=grey.colors(3), xlab="Older Students")
+pie( table(typeofgrade2), col=grey.colors(3), xlab="Younger Students")
+
+```
+
+##Conclusion:
+
+Although Pie charts arent the best way of displying data is does show that there are similar preportions of unit difficulties for both the younger and the older students. Younger Students seem t as a whole be taking more difficult units.
+
+For younger students:
+
+8.82% ADV,  26.29% FUND,  64.89% MAIN.
+
+For older students:
+
+2.99% ADV,  36.13% FUND,  60.87% MAIN.
+
+##Since the distribution is fair:
+
+we can use the box model to find whether the higher rate in fail for older students is due to chance or if it is something more.
+
+##Hypothesis
+
+H0= The ratwe of fail is the same between "old" and "younger" students is the same. Any differnce is down to chance only
+
+H1: The rate of fail of the older and younger students are actually different. Older students are more likely to fail than younger students. 
+
+##Assumptions
+
+Assumptions are that the students are independent, all taught at the same quality and have access to the same resources, essentially provided with fair opportunity regardless of what age they are. 
+
+We are also assuming that it is only the age that is affecting the rate of fail. 
+##Testing
+
+into a table:
+
+```{r}
+Age <- matrix(c(7148, 1666, 50017, 5655), nrow = 2, ncol = 2, byrow = TRUE, dimnames = list(c("Fail", 
+    "Pass"), c("Younger", "Older")))
+mosaicplot(Age)
+```
+```{r}
+chisq.test(Age)
+```
+```{r}
+mosaicplot(Age, shade = T)
+```
+
+
+
