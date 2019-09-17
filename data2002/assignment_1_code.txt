@@ -1,0 +1,338 @@
+---
+title: "Module_1_report"
+subtitle: "480386401"
+date: "02/09/2019"
+output: html_document:
+  code_folding: show
+  toc:true
+  toc_float:true
+  toc_depth: 3
+  number_sections: false
+  self_contained: true
+  fig_captions: true
+  theme: spacelab
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+#Module 1 Report, New Zealand School census
+
+This report will go through questions in relation to the New Zealand census at school dataset, and with the skills aquired in the first few weeks of the data2002 course, will attempt to uncover some new information. 
+
+The data used will be a stratified sample of the whole census at school dataset, meaning a sample drawn from a number of separate strata of the population (in this case year groups), rather than at random from the whole population, this in our case makes the sample hopefully representative.
+
+##1.Who collects this data and how is is reported?
+
+according to the website "Census at School New Zealand", 'CensusAtSchool NZ involves an online student’s survey for Years 5 through to 13. Schools take part voluntarily, with students completing the survey during lesson time, then submitting their data to contribute to an international database' 
+
+The data is then organised and presented in various ways, however in this case the full data base has not been downloaded and we instead opt for a representative sample of all the students, as this is volontary survey for children in new zealand schools it does not involve the whole population we are trying to observe so the name is somewhat misleading although as the database is relatively large, it could be considered to be much nearer to a whole population than potential other resources. 
+
+##2.How are missing values recorded, and why might they occur? In the analysis below you will need to think about how to handle missing values.
+
+In the dataset there are missing values encoded with the string 'n/a', although amoung looking at the dataset there are also some answers that have blank spaces which could be due to students putting into white space and the reponce not recognising it as NA.
+
+When importing the dataset into R under the name 'NZ_school', the importer has the option to change NA values in the data frame to something like NA, which means that in the dataframe there could be some potential blank values that r studio changes to NA. This means that there are NA values that R studio will recognise in the form of NA, with other n/a values recorded either as blank space, a string of 'n/a', or simply values that are there but make little to no sense, e.g. hight of 100m or something similar
+
+In order to counteract these potential issues, code will be used later in order to clean up the dataframe in instances it doesnt make sense.
+
+##3.Provide some general demographic information about your sample.
+
+Demographics are statistical data relating to the population and particular groups within it. SO in our case we will go through some of the subgroups found in the sample we are using. 
+
+So I will primarily, use the regions of the students to show some basic demogrpahic information such as Gender, Religion, Age
+```{r breakdown_region_gender echo=FALSE}
+library(readr)
+NZ_data <- readr::read_csv("C:/Users/My Account/Desktop/DATA2002/sampler-15d6c62a65f996.csv")
+library(dplyr)
+#dplyr::glimpse(NZ_data)
+library(tidyverse)
+NZ_data %>% 
+   dplyr::count(Region, Gender) %>% 
+   tidyr::spread(key = Gender, value = n, fill = 0)
+ table(NZ_data$Region, NZ_data$Gender)
+ 
+```
+```{r breakdown_region_age echo=FALSE}
+NZ_data %>% 
+   dplyr::count(Region, Age) %>% 
+   tidyr::spread(key = Age, value = n, fill = 0)
+ table(NZ_data$Region, NZ_data$Age)
+ 
+```
+##4. What is the most common method of travel to school?
+
+```{r}
+library(ggplot2)
+ggplot(data = NZ_data, mapping = aes(x = NZ_data$`Travel method to school`, fill = Gender)) + 
+  geom_bar() + 
+  labs(x = "", y = "Number Children", fill = "Sex",
+      caption = "Source: Census at Schol NZ",
+      title = "most common methods to get to school") + 
+  coord_flip() + 
+  theme_linedraw()
+
+```
+```{r}
+bp<- ggplot(NZ_data, aes(x="Gender", y=Gender, fill=Gender))+
+geom_bar(width = 1, stat = "identity")+labs(x = "Gender", y = "preportion Children", fill = "Sex",
+      title = "preportion of genders in sample")
+bp
+```
+As we can see from the above figures, the most common way to get to school is motor overall, and even when taking a look at the split with males and females we can see that for both males and females it is the most popular. In order of popularity, Motor, Bus, Walk, scooter, bike, train and then other. (to see the exact figures the table is located below)
+
+```{r echo = FALSE}
+table(NZ_school$Travel.method.to.school)
+```
+##5. What are the most common favourite video games? You may want to use forcats::fct_lump() to group the least common games together.
+
+In order to get a good idea of what this data looks like first, I use the basic r table command, to get a basic outlook over the results. Immediatley a few things that catch the eye: there are many categories that will need to be grouped together, and there are some categories with very high counts, first noticed ones being "dont have one" and "fortnite". 
+```{r}
+table(NZ_school$Favourite.video.game)
+```
+```{r popular_vid_games}
+video_games = NZ_data$`Favourite video game`
+#table(video_games)
+lumped = fct_lump(video_games, n = 4)
+d = table(lumped)
+barplot(table(lumped))
+barplot(d, main="most popular videogames",
+  xlab="GAME", col=c("darkblue","red","yellow","orangered","limegreen"),
+ 	legend = rownames(d), beside=FALSE)
+
+
+
+```
+from this graphic we can see that the most popular selected option was 'dont have one' then followed by all the rest of the video games that have been lumped, then is followed by the most popualr named games: Fortnite, Minecraft, Roblox, and then minecraft.
+
+The top 4 have been chosen to be left and below that lumped because the following all ahve counts of 3 and these are all with counts above 3, making it clearer which are the most popualar video games.
+
+##6. It is hypothesised that 90% of the population are right handed. Does your sample of data support this hypothesis? You may need to recode the data so that there are only two categories.
+
+again we will have a look at the dataframe, to check if the data is avaliable. 
+```{r}
+table(NZ_data$Handedness)
+```
+There are 10 ambi handed people, which will potentially be a problem as they are neither right nor left handed. We will have to count them as NA for now in this data set
+```{r recoding}
+df = recode(NZ_data$Handedness, left = "L", right = "R", .default = NA_character_)
+```
+###Hypothesis
+
+H0= The rate righthandedness is the same as theorised, 90%
+
+H1= The data suggests the rate of right handers is not 90%
+
+###Assumptions
+we are assumking with this test that we have picked a representative sample fo the popualtion, that ambi handed people dont count as right handers and that the data collected is honest. 
+##Testing
+```{r}
+# observed counts
+y = c(163, 25) 
+n = sum(y)
+# hypothesised proportions
+p = c(0.9,0.1) 
+# expected counts
+e = p*n
+e
+names = c("R", "L")
+par(mfrow = c(1, 2), cex = 1.5) # set up a graphics device with 1 row and 2 columns
+barplot(y, names.arg = names,
+        main = "Observed counts")
+barplot(e, names.arg = names,
+        main = "Expected counts")
+```
+```{r}
+d = y-e
+##finding the Test statisitic
+t0 = sum((y-e)^2/e)
+t0
+##finding the P value
+1 - pchisq(t0, df = 3)
+chisq.test(y, p = p)
+
+```
+Given this information the pvalues (likelyhood that this value would be observed if the null hypothesis was true) is roughly 50% when giving 3 degrees of freedom and 13% if giving one degree of freedom, either way this result is not statistically signicant when taking below 5% to be enough to refute the null hypothesis. Thus it is a resonable likely hood to get this observation if 90% of people really were right handed, and I believe that my sample supports this. 
+
+##7. Is handedness independent of gender?
+
+In order to find whether this is true, we will use the chi squared test for independence, but first lets look at the table for handedness and gender
+```{r}
+hand_sex = table(NZ_data$Gender, NZ_data$Handedness)
+hand_sex
+```
+```{r}
+ggplot(data = NZ_data, mapping = aes(x = Handedness, fill = Gender)) + 
+  geom_bar(position = "fill")  + 
+  labs(x = "", y = "Proportion of children", fill = "Sex",
+      caption = "Source: New Zealand census in school",
+      title = "preportion of handedness and gender visual") + 
+  coord_flip() + 
+  theme_linedraw()
+```
+Already from the observations, excluding the NA, we can see that it seems as though theres nno relationship between the two altough we will get the pvalue using the chi-squared test
+```{r}
+chisq.test(hand_sex, correct=FALSE)
+```
+from this we can see that the p-value is not overly low enough to refute the null hypthesis and maintain that from this if they were not dependent on each other than you would have a roughly 28% chance of getting a result like this and thus i can conclude that this gives evidence that they are independent (i.e. not a relatinoship between the 2)
+
+##8.What proportion of students own a cell phone? Is this proportion constant across the different year groups? Perform a test to see if there is a statistically significant difference in cell phone ownership across year groups.
+
+first we will start by looking at the preportion and raw numbers without considering the different year groups 
+
+```{r}
+table(NZ_data$`Own cell phone`)
+```
+as we can see from the raw numbers from the results we have, it seems that there is a high preportion of children who have a cell phone, being roughly 75%
+```{r}
+prop.table(table(NZ_data$`Own cell phone`))
+```
+so as we can see the preportions exact figure of students who have a cell phone above is roughly 70%. We can visualise this below.
+```{r}
+ggplot(data=NZ_data,mapping= aes(x=NZ_data$Year,fill = NZ_data$`Own cell phone`)) + geom_bar() + labs(y = "preportion of phones owned", x = "year group", fill = "owns phone",
+      caption = "Source: New Zealand census in school",
+      title = "preportion of cell phone ownership amoung different years") + 
+  coord_flip() 
+```
+As we can see from the visual above it appears that most of the students own a cell phone, however we can see that between year groups there seems to be a relatonship with the number of cell phones. Thus we can see that there is a difference, however in order to prove this formally we will use a chi-squared test of homogenity. To see whether different years have different ownership. (this test used because its a yes/no option answer which is categorical, and we have defined populations we are analysing because of the 20 from each year sample)
+```{r}
+year_phones = table(NZ_data$`Own cell phone`,NZ_data$Year)
+chisq.test(year_phones, correct = FALSE)
+year_phones
+```
+checking the cell counts we can see that there are some cols that have a cell count below 5, which means we shouldnt use chi-squared test and rather use the fisher test more a more accurate reading.
+```{r}
+y = c(15,5,14,6,11,9,8,12,4,16,3,15,2,18,1,19,0,20,0,20)
+n = sum(y)
+c=10
+r=2
+y.mat = matrix(y,nrow=r,ncol=c)
+colnames(y.mat) = c("y4","y5","y6","y7","y8","y9","y10","y11","y12","y13")
+rownames(y.mat) = c("dont have cell","own cell")
+y.mat
+#yr = apply(y.mat,1,sum) #rowsums
+#yc = apply(y.mat,2,sum) #colsum
+#(yr.mat=matrix(yr,r,c,byrow=FALSE))
+fisher.test(y.mat, workspace = 2e8)
+```
+our null hypothesis (H0) when testing whether there is a statistically significant difference in cell phone ownership across year groups would be that there isnt and the distrubution is all evenly spread. The alternative hypothsis (H1) when doing this is that there isnt an even distribution.
+The test makes the assumptions about fixed column and row totals.
+As we can see from the Fishers exact test, we can see that the pvalue is extremely low. This seems to indicate that theres evidence to refute the null hypothesis that the phones are distributed evenly amoungst years and suggests that rather some years have a higher preportion of students with mobile phones than others.
+
+##Restricting attention to students in years 7 to 12 who own a cell phone, is there an association between the tendency to check messages as soon as they wake up and feeling anxious when they’re without their phone. Do you get the same answer if you use a Monte Carlo p-value calculation? You may want to collapse some categories together, using forcats::fct_collapse().
+
+The previous question seems to point to evidence that there is a larger preportion of students in older years with cell phones than in younger years, so it makes sense for this dataset that we will use only students 7-12 who own a cell phone. 
+
+
+```{r}
+table(NZ_data$`Check messages as soon as you wake up`,NZ_data$`Feeling without phone - Anxious`)
+```
+this is the raw data without modification. The following code will attempt to split the groups up, for further analysis.
+```{r}
+mod_table = NZ_data %>% filter(Year>=7, Year<=12, `Own cell phone`=="yes")%>% select(`Check messages as soon as you wake up`,`Feeling without phone - Anxious`)
+mod_table = table(mod_table)
+mod_table
+```
+looking at this new data frame we can see that in order to do a monte carlo simulation some of the categories will need to be collapsed into each other.
+```{r}
+##make a subset of the data, by making an edited version
+NZ_data2 = NZ_data
+NZ_data2$`Check messages as soon as you wake up` = forcats::fct_collapse(NZ_data2$`Check messages as soon as you wake up`,
+                                                                                       always="always",
+                                                                                       sometimes_often = c("often","sometimes"),
+                                                                                       never_rarely = c("never","rarely"))
+mod_table2 = NZ_data2 %>% filter(Year>=7, Year<=12, `Own cell phone`=="yes")%>% select(`Check messages as soon as you wake up`,`Feeling without phone - Anxious`)
+mod_table2 = table(mod_table2)
+mod_table2
+
+```
+```{r}
+##make proper data frame, make a mosaic plot, make a graph do the analysis as.data.frame(table)
+df_mod = as.data.frame(mod_table2)
+df_mod = df_mod  %>% filter(Check.messages.as.soon.as.you.wake.up != "n/a")
+df_mod
+df_mod$Check.messages.as.soon.as.you.wake.up
+mosaicplot(mod_table2, shade=TRUE, legend=TRUE, )
+
+```
+The above mosaic plot displays the relationship between the anxiety wihtout a phone and whethee the students have checked it early in the mornign for the subgroup of students defined earlier. However the standard devitions from the expected results are not overly big. It seems that there is a slightly below expected result for the groups that sometimes to often check messages when you wake up, and dont feel anxious without the phone, meaning and a similar trend for those who always check thier phone when they wake up and feeling anxious without the phone.
+However the result is not overly different from what its expected to be so its unlikely to have a significantly significant difference. 
+
+```{r}
+y2 = c(4,14,2,29,10,41)
+n2 = sum(y2)
+c2 = 3
+r2 = 2
+y2.mat = matrix(y2, nrow = r2, ncol = c2)
+colnames(y2.mat) = c("always","never_really","sometimes")
+rownames(y2.mat) = c("anxious", "not anxious")
+y2.mat
+chisq.test(y2.mat, simulate.p.value = TRUE, B=10000)
+```
+In formal hypothesis testing we say:
+H0 in this case is that the phone checking frequencies, and the anxiety without the phone are independent (i.e theyre not related)
+H1: would be that theyre not independece.
+Assumptions would be: observations are independent, Expected cell counts to be above 5
+The p-value form the chi-sqaured test for independence showed that the chances of getting this resut if the null hypothesis is true, then the result would have about 22% as the pvalue was p-value = 0.2195, when using the monte carlo p-value calculation as well. This is not statistically significant and in conclusion it would be sensible to retain the null hypothesis and thus they are independent. 
+
+This result matches the assumption stated before when observing the mosaic plot.
+
+##What other questions could you ask of this data? Pick one and perform an appropriate test.
+##QUESTION: Are certain regions of New Zealand more likely to have Social media.
+I would assume that people in the city or more populated districts would have a higher rate of social media, we will have a look at social media having or not having between each of the regions
+```{r}
+tabx = table(NZ_data$Region, NZ_data$`Technology - None of these`)
+tabx
+#mosaicplot(tabx, shade=TRUE, legend=TRUE)
+lnames <- list(Region = c("1", "2","3","4","5","6", "7", "8","9","10","11","12","13","14","15"))
+mosaicplot(tabx, labels=lnames, shade=T, legend=TRUE)
+```
+from this grpah we can see that the Southland Region has a significantly higher preportion than expected number of people NOT  social media
+we will use a chi squared test of independednce to see if this remains significant. (yes in this instance means studnets who DONT have any social media accounts)
+```{r}
+y3 = c(52,14,12,2,28,6,1,0,2,1,3,1,2,0,4,4,14,3,3,5,7,0,1,0,8,2,16,5,2,0)
+n3 = sum(y3)
+c3 = 15
+r3 = 2
+y3.mat = matrix(y3, nrow = r3, ncol = c3)
+colnames(y3.mat) = c("1", "2","3","4","5","6", "7", "8","9","10","11","12","13","14","15")
+rownames(y3.mat) = c("has","doesnt have") ##as yes means they have no social media
+y3.mat
+chisq.test(y3.mat, simulate.p.value = TRUE, B=10000)
+```
+the pvalue for the chi squared test for independence states that the values are not likely to have an uneveen distribution across all the regions as the pvalue is very low, however, some of the cell counts are below five which measn that this test shoudlnt be used and rather the fisher test would be a better idea.
+```{r}
+fisher.test(y3.mat, workspace = 2e8)
+```
+This time the p-value of the test remains too high to say that there is a region with a higher rate of significance. 
+so in formal Hypothesis testing:
+H0: There is an even distribution of socialmedia accounts across all regions
+H1: one or more regions have significantly more or less people on social media.
+Estimation: that there would be because of the display on the mosaic plot seems to suggest that the Southerland R3egionhas significantly less people on social media.
+P Val: p val from fisher test (because some counts less than 5) was 0.34
+Conclusion: from the pvalue and tests it can be concluded that the result is not significantly significant enough to suggest that some regions have more social media than other in New Zealand amoung students across all years.
+
+##Are there any limitations of this data set?
+
+LIMITATONS INCLUDE:
+
+-Lots of missing values
+-sample size is still only 200 which to get closer to the population youll want a larger one for more accurate findings
+-Some form of bias, mostly selection due to the survey being voluntary
+-Some categories are vague because students are asked to rank how they feel about certain matters and also recall bias for things like how often do you check your phone in the morning, these variables arent the best because theyre not exact measurements and theyre a judgement from the person taking the survey
+
+##Sources
+
+-https://dplyr.tidyverse.org/reference/recode.html
+-https://kbroman.org/knitr_knutshell/pages/Rmarkdown.html
+-http://www.sthda.com/english/wiki/ggplot2-pie-chart-quick-start-guide-r-software-and-data-visualization
+-https://www.rdocumentation.org/packages/forcats/versions/0.4.0/topics/fct_lump
+-https://stackoverflow.com/questions/29953011/in-r-dealing-with-error-ggplot2-doesnt-know-how-to-deal-with-data-of-class-nu
+-https://stackoverflow.com/questions/26788049/plot-table-objects-with-ggplot
+-https://www.dummies.com/programming/r/how-to-calculate-data-proportions-and-find-the-center-in-r/
+-https://www.rdocumentation.org/packages/vcdExtra/versions/0.7-1/topics/collapse.table
+-https://stackoverflow.com/questions/26788049/plot-table-objects-with-ggplot
+-https://www.rdocumentation.org/packages/vcd/versions/0.1-3.5/topics/mosaicplot
+-https://new.censusatschool.org.nz/
+(as well as all lecture slides from both data1001 and data2002)

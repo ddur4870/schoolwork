@@ -1,0 +1,21 @@
+______________________________________________________________________
+		FOLLOWING ARE NOTES FROM DATA CAMP 
+______________________________________________________________________
+
+MODULE ONE: BASIC USE OF R 
+----------------------------
+
+ - using this: "<-" assigns a variable\
+ - modulos in r are like this 2%%1
+ - can assign any type in r like FALSE, 42, "unverse" to a variable
+ - the class(variable) function shows you the data type stord in th evariable 
+
+MODULE 2 using ggplot and data frames
+--------------------------------------
+
+ - when using r you should always load the packages first usign the "library(package)" func
+ - str(dataframe) shows you the structure of the frame
+ - when usign ggplot the thing usually looks like this ggplot(dataframe_name, aes(x= col_name, y = col_name)
+ - youll then need to add what kind of graphic you want e.g. if want points then + geom_point()
+
+#####install.packages('package_name', dependencies=TRUE, repos='http://cran.rstudio.com/')
