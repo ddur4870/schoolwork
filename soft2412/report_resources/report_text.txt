@@ -1,0 +1,235 @@
+Code coverage report for the final commit, including JUnit results for the commits. All Junit test cases that are written must be documented and explained (i.e. why the unit test was chosen and what does it test (regular input, edge cases etc). Document any tests that may have failed. You will also need to explain what the test coverage report is displaying
+JUnit must be integrated with Gradle 
+Jacoco must be integrated with Gradle to get code coverage 
+JUnit test files with correct test cases to test the program 
+Explanation about the test cases including why they were chosen 
+Brief explanation about the results/output obtained for JUnit tests  
+Explanation about the results/output from coverage test, all functionalities tested 
+The above must be su
+
+JUnit Testing
+
+What is Junit testing, how did the team do it and why did they do it.
+
+One of the most important pieces in the development of the teams currency converter, “App.java”, was the use of the Junit Framework to assist in identifying errors and potential flaws in the program. It was paramount that the changes to code tested regularly and consistently in order to ensure the best functionality possible.
+
+Junit, as has been described in both the course’s lectures and tutorial sheet in week 5, is designed to write and run tests written in the Java programming language. During the report the team particularly made use of both unit testing and integration tests. Both important methods the difference between the two is that in unit testing, the written test focuses on a particular method, ensuring that it works in the way that the programmer expects,giving clarity over whether the given method is functional or ‘bugged’. The alternative, integration testing is essentially the opposite of this, opting to test the interactions between the various methods and classes used in the development and ensuring that the code remains functional when passing through multiple sections of code. As will be shown below, the team wrote various test cases to cover the majority of the code, using both unit tests and integration tests written with Junit.
+
+In order to write these Junit tests effectively in conjunction with the teams test automaker/builder, Gradle, a few prerequisites were needed in order to allow for the use of this method of testing at all. As described in the section on Gradle, when setting these up on our computers it was necessary to add various dependencies and plug in to the build.gradle file of the teams repository. This then allowed to team to have access to the Junit classes after inputting:
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+At the start of the testing classes. These dependencies in the build.gradle file can be seen below. 
+	 Adding each of these lines of code to our project, we were then able to effectively integrate out testing with Junit. After successfully integrating, each member of the team was then provided with access to the Junt tests and was free to write relevant tests for assigned sections of code, being, Liz - writeToFile, Ben - userUpdateRates, isValidCurrency, Sarah - currConvert, Darby - readInRatesFile. (these were assigned via an issue on the team GitHub).
+
+In order to write a test, once the code for the group member was written they would need to place these tests into a specific area of the teams github gradle branch, into a folder called .../src/test/java/Agile_47 , different to the folder kept for the main source code for the application .../src/main/java/Agile_47 this was to ensure that the tests were able to be executed by gradle once they were written.
+
+To create one of these testing files, the team members created their own java testing class on their branch, allowing for the next step to take place, the writing of the Junit tests which were later merged into the same file. Some of the syntax used in these junit tests include, the import junit modules as mentioned above, the @Test in order to mark that the preceding method is infact a test, @BeforeEach and @AfterEach to mark that the following method should be executed before every test or after every test respectively along with many versions of the Assert function, such as assertTrue, assertFalse, assertEqual etc, a decisive part of each test to determine whether the actual output of the program is what the developer expects or something else. Although examples will be run through in detail below, the following screenshot shows the results of a merged “AppTest” class, containing more than 30 tests:
+
+
+
+Once a team member had written a valid test, providing that gradle was running correctly with files in the correct places, these tests were able to be run through the “gradle clean test” or “gradle clean build” commands from the root of the setup gradle file. Once the tests were written correctly, the build would either fail or pass depending on whether the test cases produced their expected outputs defined in the assert commands. The screenshot below shows the output when running the gradle clean test command. 
+
+
+As can be seen in the image above, the test cases written that produced their expected output were shown with a green “passed” whilst the test cases that did not were shown with a red “failed” next to it. As gradle had also been integrated with jacoco (defined in the build.gradle folder) along with the build file, we are able to have a closer look at the report using the gradle and jacoco files in order to see what was going on. This was done by going from the root of the gradle repository going to >build>reports>tests>test>index.html which when opened in a browser was able to give more feedback on the code an example is shown below, which will be explained in detail below. 
+
+
+The displayed HTML document was able to give a summary of all the tests that were failing and why they were failing and when they were failing. In the case of these test cases above the expected output string matches the actual output however due to the way that the assertions are formatted (as seen later on), don’t match in expected and given output. Each team member following this process, was able to produce a satisfactory amount of test cases for their assigned piece of source code on their branch. 
+
+Code coverage is another important part of testing as it has the effect of maximizing the chance of finding a bug the higher the coverage of the code, lowering the chance of having an unexpected,damaging and potentially dangerous flaw in your code. According to atlassian; “Code coverage is the percentage of code which is covered by automated tests. Code coverage measurement simply determines which statements in a body of code have been executed through a test run, and which statements have not”. The assignment specs made it clear that groups should be aiming for code coverage greater than or equal to 75% of the code. In order to meet this requirement, the jacoco report is necessary in order to get a better idea of the code coverage. This was able to be added into the gradle project through again editing the build.gradle file and adding the lines of code,
+apply plugin: 'jacoco'
+jacocoTestReport { 
+    reports { 
+        html.enabled = true 
+        csv.enabled = true 
+    }
+}
+These have the effect of making an automatic jacoco report available every time the gradle build is executed. After the final round of tests, the report gives the following report: 
+
+The general report at a glance tells us that we have a total code coverage of 95%, missing only 4/46 branches, in order to get a closer look at this we can access the further breakdown into methods of our main file, “App.class”. 
+
+This tells us which of the methods in the main file are being covered by the tests that have been written. As a whole it can be seen that the coverage of the code is high and there are some tests that a failing (indicated by the red), and the majority of branch coverage for the team’s code is high, minimising the chance of having an unknown bug in the code.
+
+A further graphic provided by jacoco to assist in the analysis of code coverage is shown below.
+
+
+Above shows the code branches of the tree that have been covered in green highlight, whilst the lines of code that have not been reached during testing are highlighted in red, The team made great use of all of the outlined features of jacoco and gradle, particularly the reports, to provide a greater quality of testing, allowing each of us to see where in the code has been effectively checked and places that could potentially have issues or might not have been tested thoroughly enough.
+
+After continual consultation of the reports in making the test cases, they were eventually finalised, and each of us created a GitHub pull request to the repository, ensuring that the tests were working before applying them to the master working branch, although there were some initial problems (as will be explained below), the tests that were ultimately decided on were those that correctly ran, provided useful and practical examples of the code in use, the final tests will be described below, with an explanation of what that code is testing for, and why it’s testing for that outcome. 
+
+
+The above is the first line of testing in the teams finalised testing file of the currency converter (App.java), which has been called “AppTest.java” and of course has the relevant Junit and other classes defined before this first test, however for this particular test, the type defined is a BeforeEach meaning that this scope of code, ‘BeforeEach’, is to be executed before each of the tests, in this case an instance of the App class is initialised along with an instance of the accompanying HashMap that stores the conversion rates of the currency converter, this is done here to save us from writing similar lines of code at the start of every individual test. 
+
+
+Similar to the code above, this method in the “AppTest.java” file, named “tearDown” is executed at the end of every test, essentially the code sets the value of the variable “test”, to null, meaning that there is no memory associated with that variable any longer. This is done at the end of every test to complement the setUp() method. Essentially by having this method at the end of every test case, it stops the occurrence of errors, like saying that the value for ‘test’ has been already defined, and this error is avoided by resetting the area of memory associated with it to null each time so that it can be again setUp() effectively at the start of the next test case without errors. Having these two functions above has the added benefit of being able to reuse the same variable name for the instance of the App class which can prevent confusion later on. 
+    @Test
+    void testisValidCurrency() {
+        String currency = "AUD";
+        assertTrue(test.isValidCurrency(currency));
+
+        currency = "USD";
+        assertTrue(test.isValidCurrency(currency));
+
+        currency = "RMB";
+        assertTrue(test.isValidCurrency(currency));
+
+        currency = "HKD";
+        assertTrue(test.isValidCurrency(currency));
+
+        currency = "EUR";
+        assertTrue(test.isValidCurrency(currency));
+    }
+
+The above test is the first Junit test marked with the @Test meaning that this going to be a proper test of the code with assertions. In the test case above the code is determining whether the isValidCurrency() function will return the desired output. In our application, the 5 currencies that the user is able to convert between includes AUD, USD, RMB, HKD, and EUR. This test runs the instance of the App defined in the setUp() method previously through the “isValidCurrency” method with the string holding the currency code, named “currency” as a parameter, the method its being passed to outputs a boolean result true if the parameter string is the code of a valid (one of the 5 currencies) or not. This test has been decided on to test the basic functionality of this important function of the code, because if the assertTrues were to fail this would mean that when the user is inputting a valid currency to eb converted, then for some reason our code would not be seeing it as valid. This is an important part of the program, so it is vital that this test case is passed.
+
+    @Test
+    void testnotValidCurrency() {
+        String currency = "INR";
+        assertFalse(test.isValidCurrency(currency));
+    }
+
+Similar to the explanation given to the code above this code also determines whether the important method in the App.java file, isValidCurrency() is working. The only difference is this time we test the alternative outcome, we now make sure that when a string of a currency that is not accepted by our applications, INR in this example, returns false and not true. As can be seen  by the assert false method shown. If this assertFalse returns true, the test passes and it can be said that the function performs its role effectively determining when both a valid and invalid currency are fed to the isValidCurrency() function through the parameter. 
+
+    @Test
+    //Tests writing a currency on the first line of the file
+    public void testFileWriteOneRateFirstLine() {
+        String filename = System.getProperty("user.dir") + "/rates.txt";
+        test.writeToFile("AUD", 22.8, filename);
+
+        File f = new File(filename);
+        String s = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(f), 100);
+            s = br.readLine();
+        } catch (Exception e) {}
+        assertEquals("AUD 22.8", s);
+    }
+
+The function above tests a different function this time within the teams application source code, this time it tests that the writeToFile method of the App class performs it role effectively when given a valid currency, valid number and a valid filename (in this case the rates.txt file located in the users current directory path. The try and catch make a file reader object from the file object made using the rates.txt file path as a name, once this file has been read in it checks the first line of the file reader and assigns it to a previously defined string variable. This string variable representing the first line of the edited file, is then able to be compared to the expected output, “AUD 22.8” shown in the parameters of the assertEquals function at the bottom. This test is important as it tests the basic functionality of the writeToFile method of the app, the team values this test result as writing to files is very important as it is the way in which the team has chosen to implement the editing rates feature. If this test were to fail, this would mean that the outcome of adding a valid file and valid rate to the file would be unsuccessful, resulting in a failure of the changing rates feature. 
+
+    @Test
+    public void testFileWriteOneRateLastLine() {
+        String filename = System.getProperty("user.dir") + "/rates.txt";
+        test.writeToFile("EUR", 1.89, filename);
+
+        File f = new File(filename);
+        String s = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(f), 100);
+            s = br.readLine();
+            s = br.readLine();
+            s = br.readLine();
+            s = br.readLine();
+            s = br.readLine();
+        } catch (Exception e) {}
+        assertEquals("EUR 1.89", s);
+    }
+
+
+In the code above, a very similar functionality is being tested. The difference is that this time it is the value for another valid currency code, EUR, that is being altered rather than the AUD as before. In order to analyse whether this writeToFile() function was performed as expected, we again use a BufferedReader type to read the file and then proceed to read the lines in the file until the fifth line which is the line on which the changed rate is expected to be and by storing this line as a string, we can again pass it to the assertEqual function to compare it to the expected output. This function is also important because it tests to see whether the writeToFile function is able to change not just one currency and is able to correctly write to the given file for any valid rate, despite being in different lines of the text file on which the rates are stored.
+
+@Test
+    //Tests writing to the same currency twice
+    public void testWriteSameCurrencyTwice() {
+        String filename = System.getProperty("user.dir") + "/rates.txt";
+        test.writeToFile("HKD", 11.11, filename);
+        test.writeToFile("HKD", 22.22, filename);
+
+        File f = new File(filename);
+        String s = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(f), 100);
+            s = br.readLine();
+            s = br.readLine();
+            s = br.readLine();
+            s = br.readLine();
+        } catch (Exception e) {}
+        assertEquals("HKD 22.22", s);
+    }
+
+This time the code continues to test the writeToFile method of the App.java file, but this time it is given a little trickier input. In this example rather than just giving a single valid rate to change, we test that when the method is called twice both with valid rates, that the most recent (i.e. second) rate is the one that is stored in the file. This is done in a similar way to the previous test cases however the main difference is that before the file is analysed again using a Bufferedreader to compare the expected to the output value, it is given two lots of the test.writeToFileMethod. This test is important as it again determines whether an important feature of the program is performing as expected, it is easily possible that the second outcome could be ignored, added to a different line, or handled in a different way to expected, but with this test case we are able to determine that the method when in this situation performs as expected.
+
+@Test
+    //Tests writing 3 different currencies to a file
+    public void testFileWriteThreeRates() {
+        String filename = System.getProperty("user.dir") + "/rates.txt";
+        test.writeToFile("EUR", 16.2, filename);
+        test.writeToFile("HKD", 3.5, filename);
+        test.writeToFile("AUD", 109.788, filename);
+
+        File f = new File(filename);
+        String s1 = "";
+        String s4 = "";
+        String s5 = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(f), 100);
+            s1 = br.readLine();
+            br.readLine();
+            br.readLine();
+            s4 = br.readLine();
+            s5 = br.readLine();
+        } catch (Exception e) {}
+        assertEquals("AUD 109.788", s1);
+        assertEquals("HKD 3.5", s4);
+        assertEquals("EUR 16.2", s5);
+    }
+
+Again testing the writetoFile method this test makes sure that when given some valid inputs, in this case three different ones rather than the same as shown before that the output is as expected. This test obtains the needed strings in the same way as described in the last two testcases. This test is important in the same way the others are as it gives the developers the assurance that despite adding multiple different valid currencies that the code is still running effectively, and that the text file called upon with the method actually changes the way in which the user expects. 
+
+    @Test
+    public void testFileWriteNoFilePresent() {
+        PrintStream orig = System.out;
+        String filename = System.getProperty("user.dir") + "/notAFile.txt";
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        test.writeToFile("USD", 200.01, filename);
+        String res = out.toString();
+        assertEquals(res, "Error reading file\n");
+        System.setOut(orig);
+    }
+
+This code is a little different to the previous ones, although testing the same method of the source code, writeToFile, this time it is given an invalid filename, one that does not exist and it has to test that the stdout given to the user matches the error message that is expected. In order to do this test a filename for the rates is constructed which doesn’t exist in the users directory. Although given valid input as parameters the result is expected to come up with the error message “Error reading in file”. This expected output is saved to a string and is compared to the standard out in an assertEquals() function. The hardest part of the implementation of this method is the capturing of the standard output of the program. This is why a ByteArrayOutputStream type is assigned to the System.out using the line, System.setOut(new PrintStream(out)); This is then converted to a String which is thrown into the assertEquals function. Once the assertion is done, the standard output is set back to the original which was saved on the very first line of the test. This test is important as it tests whether the error message when an invalid or non existing file is passed to the method that it provides the user with the appropriate error message and doesn't continue with any unexpected output or break the program all together. 
+
+@Test
+    public void testFileWriteInvalidCurrency() {
+        PrintStream orig = System.out;
+        String filename = System.getProperty("user.dir") + "/rates.txt";
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        test.writeToFile("ABC", 200.01, filename);
+        String res = out.toString();
+        assertEquals(res, "ABC is not found in the file - cannot edit it\n");
+        System.setOut(orig);
+    }
+
+The next function now again continues to check the standard output of the program to see whether the appropriate error message is displayed when an invalid code is given to the writeToFile() method in the parameter. This test captures the standard output in the same way as above making use of the .setOut() method in the System class, and the ByteArrayOutputStream Type to store this output in temporarily which can be later converted to a string for comparison using the .toString() method. This file follows the same procedure as the one above, trying to use the method to set invalid input to the chosen valid file, but checks to see whether the appropriate error message and action are shown. This is again important as it ensures that invalid input from this method is not able to break our code or cause unexpected output.
+@Test
+    // Tests that a valid user input will make the correct changes in rates.txt
+    public void testUserUpdateRatesValidInput() {
+        PrintStream orig = System.out;
+        ByteArrayInputStream in = new;
+        ByteArrayInputStream("1\nUSD\n1.5".getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        System.setIn( in );
+        String filename = System.getProperty("user.dir") + "/rates.txt";
+        Scanner sc = new Scanner(System.in);
+        test.userUpdateRates(sc, filename);
+
+        File f = new File(filename);
+        String s = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(f), 100);
+            br.readLine();
+            s = br.readLine();
+        } catch (Exception e) {}
+        System.setOut(orig);
+        // System.out.print(out.toString());
+        assertEquals("USD 1.5", s);
+    }
+
+The next test tests a different method in the class, the userUpdateRates() method, which calls upon the same function as above but this time obtains the parameters through interactions with the user. This test makes sure that when the user inputs valid input, the expected display is shown to them on the screen. In order to make this one happen, it is important to not only capture the standard out but also predefining some standard input to simulate the user interaction with the program. 
+Although the standard output of the program is captured in the same way as the test cases above the standard input is set to the program in a similar way. A new ByteArrayInputStream type is set with the expected outputs of the user, in this case 
+"1\nUSD\n1.5".getBytes(), 1 being the answer to the userUpdateRates() methods first question of "How many rates do you want to edit?\n", USD being the users input for the next question “"What is the 1st currency you want to edit?\n" (in this case), and 1.5 being the answer to the final user input responding to "What is the new rate for USD?\n". Then using the same method as above we test that the appropriate line in the file has been changed accordingly. This test is important because it 
+
